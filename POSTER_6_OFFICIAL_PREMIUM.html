@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>CARPER — Official Style · Premium</title>
+<style>
+  :root{
+    --bg:#050f17;
+    --bg2:#0a1d29;
+    --pill:#0a3469;
+    --pill-2:#1c5896;
+    --cyan:#5dd6ff;
+    --cyan-2:#82e1ff;
+    --tri:#0f4cb3;
+    --tri-2:#072d6b;
+    --green:#6ce06b;
+    --orange:#ffb24d;
+    --red:#ff6b6b;
+    --soft:#cfe7f5;
+    --gold:#facc15;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#222;font-family:'Segoe UI',Helvetica,Arial,sans-serif;color:#fff}
+  .poster{
+    width:1200px;height:1800px;margin:30px auto;
+    background:
+      radial-gradient(ellipse at 50% -10%,rgba(28,88,150,.55) 0%,transparent 45%),
+      radial-gradient(ellipse at 0% 90%,rgba(15,76,179,.45) 0%,transparent 35%),
+      linear-gradient(180deg,#071626 0%,var(--bg) 100%);
+    box-shadow:0 0 40px rgba(0,0,0,.6);overflow:hidden;position:relative
+  }
+  /* hex grid overlay */
+  .poster::before{
+    content:'';position:absolute;inset:0;
+    background-image:
+      radial-gradient(circle at 1px 1px,rgba(93,214,255,.06) 1px,transparent 0);
+    background-size:22px 22px;
+    pointer-events:none;
+  }
+  /* triangles */
+  .tri-1{
+    position:absolute;left:-30px;top:170px;width:520px;height:200px;
+    background:linear-gradient(135deg,var(--tri) 0%,var(--tri-2) 100%);
+    clip-path:polygon(0 0,100% 0,76% 100%,0 100%);z-index:1
+  }
+  .tri-2{
+    position:absolute;right:-30px;bottom:200px;width:380px;height:120px;
+    background:linear-gradient(225deg,var(--tri) 0%,var(--tri-2) 100%);
+    clip-path:polygon(28% 0,100% 0,100% 100%,0 100%);z-index:1
+  }
+  .tri-bot{
+    position:absolute;left:-40px;bottom:-60px;width:1300px;height:240px;
+    background:linear-gradient(180deg,var(--tri-2) 0%,var(--tri) 100%);
+    clip-path:polygon(0 60%,100% 0,100% 100%,0 100%);z-index:1
+  }
+
+  /* HEADER */
+  .header{
+    position:relative;z-index:6;padding:22px 36px 0 36px;
+    display:flex;align-items:flex-start;gap:18px;
+  }
+  .logo{flex:0 0 96px}
+  .header h0{color:#fff;font-weight:800;letter-spacing:1.5px;font-size:22px;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+  .header h1{color:#fff;font-weight:800;font-size:44px;letter-spacing:1px;line-height:1.05;margin-top:14px}
+  .header h1 .brand{color:var(--cyan);text-shadow:0 0 12px rgba(93,214,255,.55)}
+  .header .hsub{color:#cfe7f5;font-size:13px;font-style:italic;margin-top:6px;letter-spacing:.5px}
+
+  /* RIBBON badge for FYP */
+  .ribbon{
+    position:absolute;right:36px;top:24px;z-index:7;
+    background:linear-gradient(180deg,var(--gold),#d6a811);
+    color:#072d6b;font-weight:800;letter-spacing:1.4px;font-size:11px;
+    padding:6px 16px;border-radius:18px;
+    box-shadow:0 4px 12px rgba(0,0,0,.45);
+  }
+
+  /* HERO band: LEFT car illustration · CENTER team · RIGHT KPIs */
+  .top-band{
+    position:relative;z-index:6;display:grid;grid-template-columns:1.3fr .9fr;gap:18px;
+    padding:0 36px;margin-top:18px;
+  }
+
+  .hero{
+    background:linear-gradient(180deg,rgba(8,28,42,.8),rgba(8,28,42,.55));
+    border:1px solid rgba(93,214,255,.4);border-radius:12px;overflow:hidden;
+    box-shadow:0 0 22px rgba(93,214,255,.18) inset;
+  }
+  .hero .h-top{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:8px 14px;font-size:11px;letter-spacing:1.2px;color:var(--cyan);
+    border-bottom:1px solid rgba(93,214,255,.18);background:rgba(93,214,255,.06)
+  }
+  .hero .h-top b{color:#fff;font-size:12px}
+  .pulse{display:inline-flex;align-items:center;gap:6px;color:var(--cyan)}
+  .pulse::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+
+  /* TEAM panel */
+  .teamcard{
+    background:linear-gradient(180deg,rgba(20,60,107,.55),rgba(8,28,42,.55));
+    border:1px solid rgba(93,214,255,.35);border-radius:12px;padding:14px 18px;color:#fff;
+  }
+  .teamcard h4{font-size:18px;font-weight:800;letter-spacing:1.5px;margin-bottom:6px;color:#fff}
+  .teamcard h4::before{content:'⟫ ';color:var(--cyan)}
+  .teamcard .lbl{color:var(--cyan);font-size:10px;text-transform:uppercase;letter-spacing:1.1px;margin-top:8px}
+  .teamcard .nm{color:#fff;font-weight:700;font-size:13.5px}
+  .teamcard .em{color:#cfe7f5;font-size:11px;margin-top:6px}
+
+  .kpi-mini{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:14px}
+  .kpi-mini .k{
+    background:rgba(28,88,150,.45);border:1px solid rgba(93,214,255,.35);
+    border-radius:8px;text-align:center;padding:10px 6px;
+    box-shadow:inset 0 0 12px rgba(93,214,255,.08);
+  }
+  .kpi-mini .k b{display:block;color:var(--cyan);font-size:22px;font-weight:800;text-shadow:0 0 8px rgba(93,214,255,.4)}
+  .kpi-mini .k span{font-size:10px;color:#cfe7f5;letter-spacing:.4px;text-transform:uppercase}
+
+  /* BODY */
+  .body{position:relative;z-index:7;padding:18px 36px 0 36px}
+  .pill-h{
+    display:inline-block;
+    background:linear-gradient(180deg,var(--pill-2),var(--pill));
+    color:#fff;font-weight:800;letter-spacing:2px;font-size:18px;
+    padding:8px 30px;border-radius:30px;
+    box-shadow:0 4px 0 #051f3f,0 6px 14px rgba(0,0,0,.45);text-transform:uppercase;
+  }
+  .pill-h::before{content:'⟫ ';color:var(--cyan)}
+
+  .row{display:grid;gap:14px;margin-top:10px}
+  .r2{grid-template-columns:1fr 1fr}
+  .r3{grid-template-columns:1fr 1fr 1fr}
+  .r-12-08{grid-template-columns:1.2fr .8fr}
+  .r-08-12{grid-template-columns:.8fr 1.2fr}
+  .r-13-09-09{grid-template-columns:1.3fr .9fr .9fr}
+
+  .card{
+    background:rgba(255,255,255,.04);border:1px solid rgba(93,214,255,.22);border-radius:10px;
+    padding:14px 16px;color:#dfeefb;font-size:12px;line-height:1.55;
+  }
+  .card.solid{background:rgba(20,60,107,.45)}
+  .card.glow{box-shadow:0 0 14px rgba(93,214,255,.12),inset 0 0 14px rgba(93,214,255,.06)}
+  .card ul{padding-left:18px;margin-top:5px}
+  .card ul li{margin-bottom:3px}
+  .card h4{color:var(--cyan);font-size:12.5px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px}
+
+  .arch,.pipe-wrap{
+    background:rgba(8,28,42,.55);border:1px solid rgba(93,214,255,.28);border-radius:10px;
+    padding:14px;margin-top:10px
+  }
+
+  /* PIPELINE */
+  .pipe-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:start;position:relative}
+  .pstep{text-align:center;font-size:10.5px;line-height:1.35;color:#cfe7f5;position:relative}
+  .pstep .ci{
+    width:58px;height:58px;border-radius:16px;
+    background:linear-gradient(180deg,var(--pill-2),var(--pill));
+    color:#fff;font-weight:800;font-size:24px;
+    margin:0 auto 8px;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 16px rgba(93,214,255,.45),inset 0 -3px 0 rgba(0,0,0,.3);
+    border:1.5px solid var(--cyan);transform:rotate(45deg);
+  }
+  .pstep .ci span{transform:rotate(-45deg)}
+  .pstep b{color:var(--cyan);display:block;font-size:11px;margin-bottom:2px;letter-spacing:.4px}
+
+  /* RESULTS */
+  .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
+  .metric{
+    background:linear-gradient(180deg,rgba(28,88,150,.5),rgba(20,60,107,.5));
+    border:1px solid rgba(93,214,255,.35);border-radius:8px;padding:14px 8px;text-align:center;
+    box-shadow:inset 0 0 14px rgba(93,214,255,.08);position:relative;overflow:hidden;
+  }
+  .metric::after{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 0%,rgba(93,214,255,.18),transparent 60%);
+    pointer-events:none;
+  }
+  .metric b{display:block;font-size:26px;color:var(--cyan);font-weight:800;text-shadow:0 0 8px rgba(93,214,255,.5)}
+  .metric span{font-size:11px;color:#cfe7f5;letter-spacing:.4px;text-transform:uppercase}
+
+  .barlist{font-size:11px;line-height:1.55}
+  .barlist .lbl{display:flex;justify-content:space-between;margin-top:5px;color:#cfe7f5}
+  .bar{height:9px;background:rgba(93,214,255,.12);border-radius:5px;overflow:hidden}
+  .bar > span{display:block;height:100%;background:linear-gradient(90deg,var(--cyan-2),var(--cyan));box-shadow:0 0 6px rgba(93,214,255,.4) inset}
+  .bar.lo > span{background:linear-gradient(90deg,#ffb24d,#ff6b6b)}
+
+  /* TECH PILLS */
+  .pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .tpill{
+    background:rgba(28,88,150,.55);color:#fff;font-size:10.5px;
+    padding:5px 11px;border-radius:14px;font-weight:600;
+    border:1px solid rgba(93,214,255,.35)
+  }
+  .tpill.c{background:rgba(93,214,255,.18);color:var(--cyan-2);border-color:var(--cyan)}
+
+  /* OBJECTIVES iconcard */
+  .obj-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
+  .objc{
+    background:rgba(255,255,255,.04);border:1px solid rgba(93,214,255,.25);
+    border-radius:10px;padding:12px 10px;text-align:center;color:#cfe7f5;font-size:11px;line-height:1.4
+  }
+  .objc .ico{
+    width:46px;height:46px;border-radius:50%;background:rgba(93,214,255,.18);
+    color:var(--cyan);font-weight:800;font-size:20px;
+    margin:0 auto 6px;display:flex;align-items:center;justify-content:center;
+    border:1.5px solid var(--cyan);box-shadow:0 0 12px rgba(93,214,255,.25)
+  }
+  .objc b{display:block;color:#fff;font-size:12px;letter-spacing:.4px;margin-bottom:3px}
+
+  /* DAMAGE CHIP ROW */
+  .dmgrow{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:8px}
+  .dchip{
+    background:rgba(20,60,107,.45);border:1px solid rgba(93,214,255,.3);border-radius:8px;
+    padding:10px 6px;text-align:center;font-size:11px;color:#fff;
+  }
+  .dchip .ico{
+    width:30px;height:30px;border-radius:50%;
+    background:rgba(93,214,255,.18);color:var(--cyan);
+    margin:0 auto 4px;display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:14px;border:1.5px solid var(--cyan)
+  }
+  .dchip span{display:block;font-size:10px;color:#cfe7f5;margin-top:2px}
+
+  /* DATA MODELS */
+  .models-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+  .mod{
+    background:rgba(20,60,107,.45);border:1px solid rgba(93,214,255,.3);
+    border-left:3px solid var(--cyan);
+    border-radius:6px;padding:8px 10px;font-size:10.5px;color:#fff
+  }
+  .mod b{color:var(--cyan);display:block;font-size:11px;letter-spacing:.3px}
+  .mod span{color:#cfe7f5;font-size:9.5px;line-height:1.35;display:block;margin-top:2px}
+
+  /* FOOTER */
+  .footer{
+    position:absolute;left:36px;right:36px;bottom:18px;z-index:8;
+    display:flex;justify-content:space-between;align-items:center;
+    color:#fff;font-size:13px;font-weight:700;letter-spacing:.5px;
+  }
+  .footer span{color:var(--cyan)}
+
+  /* SVG */
+  svg .nb{fill:rgba(8,28,42,.7);stroke:#5dd6ff;stroke-width:1.4}
+  svg .nbb{fill:rgba(28,88,150,.85);stroke:#5dd6ff;stroke-width:1.5}
+  svg .nbc{fill:rgba(93,214,255,.18);stroke:#82e1ff;stroke-width:1.5}
+  svg .lbl-w{font:700 11px 'Segoe UI';fill:#fff}
+  svg .sm{font:500 9.5px 'Segoe UI';fill:#cfe7f5}
+  svg .ar{stroke:#5dd6ff;stroke-width:1.5;fill:none;marker-end:url(#mc3)}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="tri-1"></div>
+  <div class="tri-2"></div>
+  <div class="tri-bot"></div>
+
+  <div class="ribbon">FAST-NUCES · FYP 2026</div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">
+      <svg viewBox="0 0 110 110" width="96" height="96">
+        <defs>
+          <radialGradient id="lg3" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#1f6f4f"/>
+            <stop offset="100%" stop-color="#0c3924"/>
+          </radialGradient>
+        </defs>
+        <circle cx="55" cy="55" r="52" fill="url(#lg3)" stroke="#facc15" stroke-width="1.5"/>
+        <circle cx="55" cy="55" r="38" fill="none" stroke="#facc15" stroke-width="1"/>
+        <path id="topArc3" d="M 17 55 A 38 38 0 0 1 93 55" fill="none"/>
+        <path id="botArc3" d="M 17 55 A 38 38 0 0 0 93 55" fill="none"/>
+        <text font-size="6.5" font-weight="700" fill="#facc15" letter-spacing="1.1">
+          <textPath href="#topArc3" startOffset="2">NATIONAL UNIVERSITY OF</textPath>
+        </text>
+        <text font-size="5.5" font-weight="700" fill="#facc15" letter-spacing="1">
+          <textPath href="#botArc3" startOffset="2">COMPUTER &amp; EMERGING SCIENCES</textPath>
+        </text>
+        <text x="55" y="56" text-anchor="middle" font-size="22" font-weight="900" fill="#facc15" font-family="Georgia">nu</text>
+        <polygon points="55,33 57,38 62,38 58,41 60,46 55,43 50,46 52,41 48,38 53,38" fill="#facc15"/>
+      </svg>
+    </div>
+    <div style="flex:1">
+      <h0>NATIONAL UNIVERSITY OF COMPUTER &amp; EMERGING SCIENCES</h0>
+      <h1><span class="brand">CARPER</span> — THE CAR PROBLEM SOLVER</h1>
+      <div class="hsub">YOLOv8n Damage Detection · Gradient-Boosting Cost Estimation · Sentence-BERT Smart Marketplace</div>
+    </div>
+  </div>
+
+  <!-- HERO + TEAM -->
+  <div class="top-band">
+    <div class="hero">
+      <div class="h-top">
+        <div><b>CARPER · INSPECTION</b> &nbsp;·&nbsp; 4 issues identified · YOLOv8n on CarDD</div>
+        <div class="pulse">SCANNING</div>
+      </div>
+      <svg viewBox="0 0 700 270" width="100%" height="265" style="display:block">
+        <defs>
+          <radialGradient id="cgrad3" cx="50%" cy="100%" r="100%">
+            <stop offset="0%" stop-color="#1454a3" stop-opacity=".7"/>
+            <stop offset="100%" stop-color="#0a1a23" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="cline3" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#82e1ff"/>
+            <stop offset="100%" stop-color="#1c5896"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="350" cy="240" rx="280" ry="22" fill="url(#cgrad3)"/>
+
+        <!-- car body -->
+        <path d="M120,200 C130,168 165,148 215,143 L280,108 C300,88 360,84 405,98 L460,143 C515,146 550,165 560,200 L560,220 L120,220 Z"
+              fill="rgba(20,60,107,.5)" stroke="url(#cline3)" stroke-width="2"/>
+        <path d="M250,146 L298,114 L395,114 L450,146 Z" fill="rgba(93,214,255,.10)" stroke="#5dd6ff" stroke-width="1.2"/>
+        <line x1="350" y1="114" x2="350" y2="146" stroke="#5dd6ff" stroke-width="1"/>
+        <path d="M308,146 L308,220" stroke="#5dd6ff" stroke-width="1" stroke-dasharray="3 3" opacity=".7"/>
+        <circle cx="200" cy="220" r="24" fill="#0a1a23" stroke="#5dd6ff" stroke-width="2"/>
+        <circle cx="200" cy="220" r="11" fill="#1c5896" stroke="#82e1ff" stroke-width="1.4"/>
+        <circle cx="475" cy="220" r="24" fill="#0a1a23" stroke="#5dd6ff" stroke-width="2"/>
+        <circle cx="475" cy="220" r="11" fill="#1c5896" stroke="#82e1ff" stroke-width="1.4"/>
+        <circle cx="540" cy="190" r="14" fill="#82e1ff" opacity=".5"/>
+        <circle cx="540" cy="190" r="6" fill="#fff"/>
+
+        <!-- bounding boxes on car parts -->
+        <rect x="160" y="155" width="60" height="40" fill="none" stroke="#6ce06b" stroke-width="2" stroke-dasharray="4 2" opacity=".9"/>
+        <rect x="240" y="148" width="80" height="60" fill="none" stroke="#ffb24d" stroke-width="2" stroke-dasharray="4 2" opacity=".9"/>
+        <rect x="380" y="140" width="80" height="40" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="4 2" opacity=".9"/>
+        <rect x="478" y="170" width="60" height="34" fill="none" stroke="#6ce06b" stroke-width="2" stroke-dasharray="4 2" opacity=".9"/>
+
+        <!-- DMG 1 -->
+        <rect x="14" y="22" width="120" height="44" fill="rgba(8,28,42,.85)" stroke="#6ce06b" stroke-width="1.4" rx="3"/>
+        <circle cx="22" cy="32" r="3" fill="#6ce06b"/>
+        <text x="30" y="36" font-size="9.5" fill="#6ce06b" font-weight="700">DMG 1</text>
+        <text x="20" y="50" font-size="9" fill="#fff" font-weight="700">FRONT FENDER</text>
+        <text x="20" y="62" font-size="9" fill="#cfe7f5">Scratch · 84%</text>
+        <line x1="133" y1="55" x2="190" y2="155" stroke="#6ce06b" stroke-width="1.4" stroke-dasharray="3 2"/>
+        <circle cx="190" cy="155" r="4" fill="#6ce06b"/>
+
+        <!-- DMG 2 -->
+        <rect x="14" y="190" width="120" height="44" fill="rgba(8,28,42,.85)" stroke="#ffb24d" stroke-width="1.4" rx="3"/>
+        <circle cx="22" cy="200" r="3" fill="#ffb24d"/>
+        <text x="30" y="204" font-size="9.5" fill="#ffb24d" font-weight="700">DMG 2</text>
+        <text x="20" y="218" font-size="9" fill="#fff" font-weight="700">DRIVER DOOR</text>
+        <text x="20" y="230" font-size="9" fill="#cfe7f5">Dent · 91%</text>
+        <line x1="134" y1="210" x2="280" y2="180" stroke="#ffb24d" stroke-width="1.4" stroke-dasharray="3 2"/>
+        <circle cx="280" cy="180" r="4" fill="#ffb24d"/>
+
+        <!-- DMG 3 -->
+        <rect x="566" y="22" width="120" height="44" fill="rgba(8,28,42,.85)" stroke="#ff6b6b" stroke-width="1.4" rx="3"/>
+        <circle cx="574" cy="32" r="3" fill="#ff6b6b"/>
+        <text x="582" y="36" font-size="9.5" fill="#ff6b6b" font-weight="700">DMG 3</text>
+        <text x="572" y="50" font-size="9" fill="#fff" font-weight="700">REAR QUARTER</text>
+        <text x="572" y="62" font-size="9" fill="#cfe7f5">Crack · 96%</text>
+        <line x1="566" y1="55" x2="455" y2="140" stroke="#ff6b6b" stroke-width="1.4" stroke-dasharray="3 2"/>
+        <circle cx="455" cy="140" r="4" fill="#ff6b6b"/>
+
+        <!-- DMG 4 -->
+        <rect x="566" y="190" width="120" height="44" fill="rgba(8,28,42,.85)" stroke="#6ce06b" stroke-width="1.4" rx="3"/>
+        <circle cx="574" cy="200" r="3" fill="#6ce06b"/>
+        <text x="582" y="204" font-size="9.5" fill="#6ce06b" font-weight="700">DMG 4</text>
+        <text x="572" y="218" font-size="9" fill="#fff" font-weight="700">REAR BUMPER</text>
+        <text x="572" y="230" font-size="9" fill="#cfe7f5">Scratch · 78%</text>
+        <line x1="566" y1="210" x2="510" y2="190" stroke="#6ce06b" stroke-width="1.4" stroke-dasharray="3 2"/>
+        <circle cx="510" cy="190" r="4" fill="#6ce06b"/>
+
+        <rect x="0" y="0" width="700" height="3" fill="#82e1ff" opacity=".55">
+          <animate attributeName="y" from="0" to="260" dur="2.5s" repeatCount="indefinite"/>
+        </rect>
+      </svg>
+    </div>
+
+    <div class="teamcard">
+      <h4>CARPER TEAM</h4>
+      <div class="lbl">Supervisor</div>
+      <div class="nm" style="color:var(--cyan)">Mr. Shoaib Raza</div>
+      <div class="lbl">Team Lead</div>
+      <div class="nm">Syed Wali Mohsin Naqvi <span style="color:var(--cyan-2)">· 22K-4550</span></div>
+      <div class="lbl">Team Members</div>
+      <div class="nm">Syed Ghalib Hussain Zaidi <span style="color:var(--cyan-2)">· 22K-4536</span></div>
+      <div class="nm">Syed Azhaan Ali <span style="color:var(--cyan-2)">· 22K-4140</span></div>
+      <div class="em">k224550 · k224536 · k224140 @nu.edu.pk</div>
+
+      <div class="kpi-mini">
+        <div class="k"><b>0.732</b><span>Overall mAP@0.5</span></div>
+        <div class="k"><b>4.4 ms</b><span>Inference / image</span></div>
+        <div class="k"><b>4 K</b><span>CarDD Train Imgs</span></div>
+        <div class="k"><b>6</b><span>Damage Classes</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- ABSTRACT -->
+    <div style="margin-top:14px"><div class="pill-h">ABSTRACT</div></div>
+    <div class="card glow" style="margin-top:8px">
+      With the rapid advancement in AI and computer vision, automated vehicle damage detection has emerged as a significant area of research and application. Manual assessment is prone to human error, fraud, and is time-consuming — affecting <b>insurance, vehicle rental, and resale</b>. <b>CARPER — The Car Problem Solver</b> is a smart web-based application that detects exterior vehicle damage and provides an estimated repair cost. It uses <b>YOLOv8n</b> trained on the <b>CarDD</b> dataset (4,000 images, 6 classes). For cost estimation, Linear Regression, Random Forest, Extra Trees and Gradient Boosting were evaluated; <b>Gradient Boosting</b> was selected on best performance. The platform follows a Client–Server <b>three-tier architecture</b> (Next.js · NestJS · PostgreSQL), with semantic search and price-matching algorithms connecting users to affordable replacement parts.
+    </div>
+
+    <!-- OBJECTIVES with icons -->
+    <div style="margin-top:14px"><div class="pill-h">OBJECTIVE</div></div>
+    <div class="obj-grid">
+      <div class="objc"><div class="ico">◎</div><b>DETECT</b>YOLOv8n on CarDD · 6 exterior damage classes</div>
+      <div class="objc"><div class="ico">$</div><b>ESTIMATE</b>Gradient Boosting predicts repair cost</div>
+      <div class="objc"><div class="ico">≡</div><b>RECOMMEND</b>Sentence-BERT semantic part search</div>
+      <div class="objc"><div class="ico">⌘</div><b>DELIVER</b>Unified web platform · owners · rental · admin</div>
+    </div>
+
+    <!-- DAMAGE CLASSES STRIP -->
+    <div style="margin-top:14px"><div class="pill-h">DAMAGE CLASSES (CARDD)</div></div>
+    <div class="dmgrow">
+      <div class="dchip"><div class="ico">◎</div><b>Dent</b><span>Body deformation</span></div>
+      <div class="dchip"><div class="ico">/</div><b>Scratch</b><span>Surface abrasion</span></div>
+      <div class="dchip"><div class="ico">⚡</div><b>Crack</b><span>Body / panel split</span></div>
+      <div class="dchip"><div class="ico">✺</div><b>Glass Shatter</b><span>Window / windshield</span></div>
+      <div class="dchip"><div class="ico">⊖</div><b>Tire Flat</b><span>Deflated tire</span></div>
+      <div class="dchip"><div class="ico">☀</div><b>Lamp Broken</b><span>Headlight / taillight</span></div>
+    </div>
+
+    <!-- SYSTEM ARCHITECTURE -->
+    <div style="margin-top:14px"><div class="pill-h">SYSTEM ARCHITECTURE</div></div>
+    <div class="arch">
+      <svg viewBox="0 0 1100 280" width="100%" height="240">
+        <defs>
+          <marker id="mc3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#5dd6ff"/>
+          </marker>
+        </defs>
+
+        <!-- TIER 1 -->
+        <rect x="20" y="20" width="200" height="240" class="nb" rx="8"/>
+        <text x="120" y="42" text-anchor="middle" class="lbl-w">PRESENTATION TIER</text>
+        <text x="120" y="58" text-anchor="middle" class="sm">Next.js 15 · React Query</text>
+        <rect x="40" y="76"  width="160" height="32" class="nbb" rx="4"/><text x="120" y="97"  text-anchor="middle" class="lbl-w">Owner Dashboard</text>
+        <rect x="40" y="116" width="160" height="32" class="nbb" rx="4"/><text x="120" y="137" text-anchor="middle" class="lbl-w">Rental Dashboard</text>
+        <rect x="40" y="156" width="160" height="32" class="nbb" rx="4"/><text x="120" y="177" text-anchor="middle" class="lbl-w">Admin Console</text>
+        <rect x="40" y="196" width="160" height="32" class="nbb" rx="4"/><text x="120" y="217" text-anchor="middle" class="lbl-w">Live Camera (ONNX)</text>
+
+        <!-- TIER 2 -->
+        <rect x="240" y="20" width="540" height="240" class="nb" rx="8"/>
+        <text x="510" y="42" text-anchor="middle" class="lbl-w">APPLICATION TIER · NestJS 11 (/api/v1)</text>
+        <text x="510" y="58" text-anchor="middle" class="sm">Throttler → JwtAuth → Roles → Verification</text>
+
+        <rect x="255" y="76"  width="120" height="32" class="nbb" rx="4"/><text x="315" y="97" text-anchor="middle" class="lbl-w">Auth · OAuth</text>
+        <rect x="380" y="76"  width="120" height="32" class="nbb" rx="4"/><text x="440" y="97" text-anchor="middle" class="lbl-w">Users · CNIC</text>
+        <rect x="505" y="76"  width="125" height="32" class="nbb" rx="4"/><text x="567" y="97" text-anchor="middle" class="lbl-w">Catalog</text>
+        <rect x="635" y="76"  width="130" height="32" class="nbb" rx="4"/><text x="700" y="97" text-anchor="middle" class="lbl-w">User Cars · Imgs</text>
+
+        <rect x="255" y="116" width="120" height="32" class="nbc" rx="4"/><text x="315" y="137" text-anchor="middle" class="lbl-w">Damage AI</text>
+        <rect x="380" y="116" width="120" height="32" class="nbc" rx="4"/><text x="440" y="137" text-anchor="middle" class="lbl-w">Cost Model</text>
+        <rect x="505" y="116" width="125" height="32" class="nbc" rx="4"/><text x="567" y="137" text-anchor="middle" class="lbl-w">Parts Search</text>
+        <rect x="635" y="116" width="130" height="32" class="nbc" rx="4"/><text x="700" y="137" text-anchor="middle" class="lbl-w">Live WS</text>
+
+        <rect x="255" y="156" width="120" height="32" class="nbb" rx="4"/><text x="315" y="177" text-anchor="middle" class="lbl-w">Listings</text>
+        <rect x="380" y="156" width="120" height="32" class="nbb" rx="4"/><text x="440" y="177" text-anchor="middle" class="lbl-w">Rentals</text>
+        <rect x="505" y="156" width="125" height="32" class="nbb" rx="4"/><text x="567" y="177" text-anchor="middle" class="lbl-w">Notifications</text>
+        <rect x="635" y="156" width="130" height="32" class="nbb" rx="4"/><text x="700" y="177" text-anchor="middle" class="lbl-w">Admin · PDF</text>
+
+        <rect x="255" y="196" width="510" height="32" class="nb" rx="4"/>
+        <text x="510" y="217" text-anchor="middle" class="sm">Prisma ORM · DTO Validation · Helmet · Throttler · Logger</text>
+
+        <!-- TIER 3 -->
+        <rect x="800" y="20" width="280" height="240" class="nb" rx="8"/>
+        <text x="940" y="42" text-anchor="middle" class="lbl-w">DATA &amp; AI TIER</text>
+        <rect x="815" y="60"  width="250" height="32" class="nbc" rx="4"/><text x="940" y="81"  text-anchor="middle" class="lbl-w">YOLOv8n · FastAPI</text>
+        <rect x="815" y="98"  width="250" height="32" class="nbc" rx="4"/><text x="940" y="119" text-anchor="middle" class="lbl-w">Gradient Boosting</text>
+        <rect x="815" y="136" width="250" height="32" class="nbc" rx="4"/><text x="940" y="157" text-anchor="middle" class="lbl-w">Sentence-BERT · FAISS</text>
+        <rect x="815" y="174" width="250" height="32" class="nbb" rx="4"/><text x="940" y="195" text-anchor="middle" class="lbl-w">PostgreSQL · 8 tables</text>
+        <rect x="815" y="212" width="250" height="32" class="nbb" rx="4"/><text x="940" y="233" text-anchor="middle" class="lbl-w">Cloudinary CDN</text>
+
+        <path class="ar" d="M220,140 L240,140"/>
+        <path class="ar" d="M780,80  L815,76"/>
+        <path class="ar" d="M780,140 L815,114"/>
+        <path class="ar" d="M780,180 L815,152"/>
+        <path class="ar" d="M780,212 L815,190"/>
+      </svg>
+    </div>
+
+    <!-- DATA MODELS -->
+    <div class="models-row">
+      <div class="mod"><b>User</b><span>auth · roles · CNIC</span></div>
+      <div class="mod"><b>UserCar</b><span>registered cars · VIN</span></div>
+      <div class="mod"><b>CarImage</b><span>versioned · category</span></div>
+      <div class="mod"><b>CarCatalog</b><span>make · model · year</span></div>
+      <div class="mod"><b>CarListing</b><span>marketplace listings</span></div>
+      <div class="mod"><b>Rental</b><span>pre/post inspection</span></div>
+      <div class="mod"><b>Notification</b><span>system alerts</span></div>
+      <div class="mod"><b>DamageScan</b><span>YOLOv8 results</span></div>
+    </div>
+
+    <!-- WORKING PIPELINE -->
+    <div style="margin-top:14px"><div class="pill-h">WORKING PIPELINE</div></div>
+    <div class="pipe-wrap">
+      <div class="pipe-grid">
+        <div class="pstep"><div class="ci"><span>1</span></div><b>UPLOAD</b>1–10 photos via web/camera</div>
+        <div class="pstep"><div class="ci"><span>2</span></div><b>STORE</b>Cloudinary CDN · thumbnails</div>
+        <div class="pstep"><div class="ci"><span>3</span></div><b>DETECT</b>YOLOv8n boxes + scores</div>
+        <div class="pstep"><div class="ci"><span>4</span></div><b>SEVERITY</b>Per-part class &amp; conf.</div>
+        <div class="pstep"><div class="ci"><span>5</span></div><b>ESTIMATE</b>Gradient Boosting cost</div>
+        <div class="pstep"><div class="ci"><span>6</span></div><b>RECOMMEND</b>Sentence-BERT parts</div>
+        <div class="pstep"><div class="ci"><span>7</span></div><b>REPORT</b>PDF + dashboard</div>
+      </div>
+    </div>
+
+    <!-- RESULTS · COST · TECH (3 col) -->
+    <div class="row r-13-09-09" style="margin-top:14px">
+      <div>
+        <div class="pill-h">RESULTS</div>
+        <div class="card" style="margin-top:8px">
+          <h4>Per-Class mAP@0.5</h4>
+          <div class="barlist">
+            <div class="lbl"><span>Glass Shatter</span><span>0.979</span></div><div class="bar"><span style="width:97.9%"></span></div>
+            <div class="lbl"><span>Tire Flat</span><span>0.934</span></div><div class="bar"><span style="width:93.4%"></span></div>
+            <div class="lbl"><span>Lamp Broken</span><span>0.871</span></div><div class="bar"><span style="width:87.1%"></span></div>
+            <div class="lbl"><span>Dent</span><span>0.61</span></div><div class="bar lo"><span style="width:61%"></span></div>
+            <div class="lbl"><span>Scratch</span><span>0.55</span></div><div class="bar lo"><span style="width:55%"></span></div>
+            <div class="lbl"><span>Crack</span><span>0.43</span></div><div class="bar lo"><span style="width:43%"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="pill-h">COST RMSE</div>
+        <div class="card solid" style="margin-top:8px">
+          <svg viewBox="0 0 240 160" width="100%" height="170">
+            <line x1="30" y1="20" x2="30" y2="130" stroke="#5dd6ff" opacity=".4"/>
+            <line x1="30" y1="130" x2="230" y2="130" stroke="#5dd6ff" opacity=".4"/>
+            <text x="30" y="14" font-size="9" fill="#cfe7f5">RMSE ↓</text>
+            <rect x="50"  y="40"  width="32" height="90" fill="#1c5896"/>
+            <rect x="92"  y="60"  width="32" height="70" fill="#3a82c8"/>
+            <rect x="134" y="78"  width="32" height="52" fill="#5fb5e3"/>
+            <rect x="176" y="92"  width="32" height="38" fill="#82e1ff"/>
+            <text x="66"  y="148" text-anchor="middle" font-size="8.5" fill="#cfe7f5">Linear</text>
+            <text x="108" y="148" text-anchor="middle" font-size="8.5" fill="#cfe7f5">RF</text>
+            <text x="150" y="148" text-anchor="middle" font-size="8.5" fill="#cfe7f5">XT</text>
+            <text x="192" y="148" text-anchor="middle" font-size="8.5" fill="#82e1ff" font-weight="700">GB ★</text>
+          </svg>
+          <div style="font-size:10.5px;color:#cfe7f5;margin-top:4px">
+            <b style="color:var(--cyan)">Gradient Boosting</b> chosen for production.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="pill-h">TECH STACK</div>
+        <div class="card" style="margin-top:8px">
+          <div class="pill-row">
+            <span class="tpill c">Next.js 15</span>
+            <span class="tpill c">Tailwind</span>
+            <span class="tpill">NestJS 11</span>
+            <span class="tpill">Prisma 7</span>
+            <span class="tpill">PostgreSQL</span>
+            <span class="tpill">FastAPI</span>
+            <span class="tpill">YOLOv8n</span>
+            <span class="tpill">GradBoost</span>
+            <span class="tpill">Sentence-BERT</span>
+            <span class="tpill">FAISS</span>
+            <span class="tpill">ONNX-Web</span>
+            <span class="tpill">Cloudinary</span>
+            <span class="tpill">JWT · OAuth</span>
+            <span class="tpill">Docker</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCLUSION -->
+    <div style="margin-top:14px"><div class="pill-h">CONCLUSION</div></div>
+    <div class="card glow" style="margin-top:8px">
+      CARPER successfully demonstrates that a lightweight <b>YOLOv8n</b> trained on the CarDD dataset can deliver competitive multi-class vehicle damage detection at <b>real-time inference speed (4.4 ms/image)</b>, achieving an overall <b>mAP@0.5 of 0.732</b> with particularly strong performance on Glass Shatter (0.979), Tire Flat (0.934) and Lamp Broken (0.871). The integrated cost-estimation module and semantic part-recommendation pipeline extend CARPER into a practical, end-to-end automotive assessment tool. The system fulfils all three project success criteria and is presented as a fully containerised, web-deployed solution suitable for <b>insurance automation</b>, <b>vehicle rental services</b>, and <b>private resale valuation</b>.
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>Supervisor: <span>Mr. Shoaib Raza</span> &nbsp;|&nbsp; k224550 &nbsp;|&nbsp; k224536 &nbsp;|&nbsp; k224140 @nu.edu.pk</div>
+    <div style="color:var(--cyan);font-weight:800">FAST-NUCES · FYP 2026</div>
+  </div>
+</div>
+</body>
+</html>

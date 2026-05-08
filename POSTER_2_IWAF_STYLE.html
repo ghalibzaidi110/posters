@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>CARPER — The Car Problem Solver | Poster 2</title>
+<style>
+  :root{
+    --orange:#ee7a3a;
+    --orange-2:#d65d1d;
+    --teal:#2b8aa6;
+    --teal-2:#1f6c84;
+    --slate:#384655;
+    --bg:#ffffff;
+    --soft:#f6f1ec;
+    --line:#dcd2c5;
+    --ink:#2a2a2a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#222;font-family:'Segoe UI',Helvetica,Arial,sans-serif;color:var(--ink)}
+  .poster{
+    width:1200px;height:1800px;
+    margin:30px auto;background:var(--bg);
+    box-shadow:0 0 40px rgba(0,0,0,.6);
+    overflow:hidden;position:relative;padding:30px 36px;
+  }
+
+  /* ======= HEADER ======= */
+  .top{
+    display:flex;align-items:center;justify-content:space-between;
+    background:linear-gradient(95deg,var(--orange) 0%,var(--orange-2) 100%);
+    color:#fff;padding:18px 26px;border-radius:12px 12px 4px 4px;
+    box-shadow:0 6px 0 #c7531a;
+  }
+  .top .left{display:flex;align-items:center;gap:18px}
+  .shield{
+    width:64px;height:64px;background:#fff;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;color:var(--orange);font-weight:900;font-size:28px;
+    box-shadow:inset 0 -4px 0 rgba(0,0,0,.08);
+  }
+  .top h1{font-size:38px;font-weight:800;letter-spacing:1.5px}
+  .top h2{font-size:15px;font-weight:500;opacity:.95;letter-spacing:.5px;margin-top:2px}
+  .uni-badge{
+    background:#fff;color:var(--slate);padding:10px 14px;border-radius:8px;
+    font-size:11.5px;font-weight:600;line-height:1.5;text-align:right
+  }
+  .uni-badge b{color:var(--orange-2);font-size:13px;display:block}
+
+  /* ======= SECTION HEADERS ======= */
+  .h-section{
+    color:var(--orange-2);font-size:18px;font-weight:800;letter-spacing:.5px;
+    margin:14px 0 8px 0;display:flex;align-items:center;gap:8px;
+  }
+  .h-section::before{content:'';width:8px;height:22px;background:var(--orange);border-radius:2px;display:inline-block}
+  .h-sub{font-size:11.5px;color:#666;font-style:italic;margin-top:-4px;margin-bottom:6px;padding-left:18px}
+
+  .row{display:grid;gap:14px}
+  .r2{grid-template-columns:1fr 1fr}
+  .r3{grid-template-columns:1fr 1fr 1fr}
+  .r-12-08{grid-template-columns:1.2fr .8fr}
+
+  .panel{
+    background:#fff;border:1px solid var(--line);border-left:4px solid var(--orange);
+    padding:12px 14px;border-radius:6px;font-size:12px;line-height:1.55
+  }
+  .panel.teal{border-left-color:var(--teal)}
+  .panel ul{padding-left:16px;margin-top:4px}
+  .panel ul li{margin-bottom:3px}
+  .panel h4{color:var(--teal-2);font-size:13px;margin-bottom:4px;letter-spacing:.5px;text-transform:uppercase}
+
+  /* ======= FEATURES ICON ROW ======= */
+  .feat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:6px 0 4px}
+  .feat{
+    background:var(--soft);border-radius:10px;text-align:center;padding:14px 8px 10px;
+    border:1px solid var(--line);
+  }
+  .feat .ico{
+    width:48px;height:48px;border-radius:50%;background:#fff;
+    border:2px solid var(--orange);margin:0 auto 6px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--orange-2);font-weight:800;font-size:18px;
+  }
+  .feat b{display:block;font-size:11px;color:var(--slate);letter-spacing:.3px}
+  .feat span{font-size:10px;color:#777;display:block;margin-top:2px;line-height:1.3}
+
+  /* ======= ARCHITECTURE BOX ======= */
+  .arch-box{
+    background:#fcfaf7;border:1.5px dashed var(--line);border-radius:10px;
+    padding:10px;
+  }
+
+  /* ======= DASHBOARD MOCK ======= */
+  .dashboard{
+    background:linear-gradient(180deg,#fff 0%,#fdf3ec 100%);
+    border:1px solid var(--line);border-radius:10px;padding:12px;
+  }
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .kpi{
+    background:#fff;border:1px solid var(--line);border-radius:6px;
+    text-align:center;padding:8px 4px;
+  }
+  .kpi b{display:block;font-size:18px;color:var(--orange-2);font-weight:800}
+  .kpi span{font-size:10px;color:#666;letter-spacing:.3px}
+  .chart-row{display:grid;grid-template-columns:1.4fr 1fr;gap:8px;margin-top:8px}
+  .chart{
+    background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px;
+  }
+  .chart h5{font-size:11px;color:var(--slate);font-weight:700;margin-bottom:4px}
+
+  /* ======= PIPELINE ======= */
+  .pipeline-row{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:0;
+    background:#fcfaf7;border:1px solid var(--line);border-radius:10px;padding:10px;
+  }
+  .ps{position:relative;padding:6px 12px 6px 22px;font-size:10.5px;line-height:1.35}
+  .ps::before{
+    content:attr(data-num);position:absolute;left:0;top:5px;
+    width:18px;height:18px;background:var(--orange);color:#fff;
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:10px;font-weight:800;
+  }
+  .ps b{display:block;color:var(--teal-2);font-size:11px;margin-bottom:1px;text-transform:uppercase;letter-spacing:.3px}
+  .ps + .ps{border-left:1px dashed var(--line)}
+
+  /* ======= RESULTS ======= */
+  .results-row{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}
+  .bar-row{font-size:11px;line-height:1.6}
+  .bar-row .lbl{display:flex;justify-content:space-between;margin-top:4px}
+  .bar{height:8px;background:#eedfd0;border-radius:4px;overflow:hidden}
+  .bar > span{display:block;height:100%;background:linear-gradient(90deg,var(--orange),var(--orange-2))}
+  .bar.teal > span{background:linear-gradient(90deg,#5cbcd6,var(--teal-2))}
+
+  /* ======= TECH PILLS ======= */
+  .pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .pill{
+    background:var(--slate);color:#fff;font-size:10.5px;padding:5px 11px;border-radius:14px;
+    font-weight:600;letter-spacing:.3px
+  }
+  .pill.o{background:var(--orange-2)}
+  .pill.t{background:var(--teal-2)}
+
+  /* ======= FOOTER ======= */
+  .footer{
+    margin-top:14px;background:linear-gradient(95deg,var(--teal-2),var(--teal));
+    color:#fff;padding:14px 22px;border-radius:8px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .footer .team{font-size:12px;line-height:1.5}
+  .footer .team b{color:#ffd9b9;letter-spacing:.6px}
+  .footer .sup{font-size:11.5px;text-align:right;line-height:1.5}
+  .footer .sup b{color:#ffd9b9;display:block;letter-spacing:.6px}
+
+  /* SVG */
+  svg .b{fill:#fff;stroke:#dcd2c5;stroke-width:1.4}
+  svg .o{fill:#fff7f0;stroke:#ee7a3a;stroke-width:1.6}
+  svg .t{fill:#eef7fa;stroke:#2b8aa6;stroke-width:1.6}
+  svg .lbl{font:700 11.5px 'Segoe UI';fill:#384655}
+  svg .sm{font:500 9.5px 'Segoe UI';fill:#4a5764}
+  svg .ar{stroke:#ee7a3a;stroke-width:1.6;fill:none;marker-end:url(#mhead)}
+  svg .ar.t{stroke:#2b8aa6}
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- ===== HEADER ===== -->
+  <div class="top">
+    <div class="left">
+      <div class="shield">⚙</div>
+      <div>
+        <h1>CARPER · The Car Problem Solver</h1>
+        <h2>AI-Powered Vehicle Damage Detection · Cost Estimation · Smart Marketplace</h2>
+      </div>
+    </div>
+    <div class="uni-badge">
+      <b>FAST-NUCES</b>
+      Department of Computer Science<br/>FYP · 2026
+    </div>
+  </div>
+
+  <!-- ===== INTRO + OBJECTIVES ===== -->
+  <div class="row r-12-08" style="margin-top:14px">
+    <div>
+      <div class="h-section">Introduction</div>
+      <div class="panel">
+        <b>CARPER</b> is a hybrid web platform that combines deep-learning object detection,
+        regression-based cost modelling, and semantic search to automate the entire car-damage
+        assessment loop. It inspects user-uploaded vehicle photos in real time, identifies
+        exterior damage across <b>six classes</b>, predicts a fair repair estimate, and
+        recommends affordable replacement parts — all behind a unified Next.js dashboard for
+        owners, rental businesses and admins.
+      </div>
+    </div>
+    <div>
+      <div class="h-section">Objectives</div>
+      <div class="panel teal">
+        <ol style="padding-left:18px;line-height:1.55">
+          <li>Real-time damage detection with YOLOv8n on CarDD.</li>
+          <li>Repair-cost estimation via Gradient Boosting.</li>
+          <li>Affordable-part suggestion through semantic marketplace search.</li>
+          <li>Containerised, role-based web interface for end-users.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FEATURES ROW ===== -->
+  <div class="h-section">Core Features</div>
+  <div class="feat-row">
+    <div class="feat"><div class="ico">◎</div><b>Damage Detection</b><span>6-class YOLOv8n</span></div>
+    <div class="feat"><div class="ico">$</div><b>Cost Estimation</b><span>Gradient Boosting</span></div>
+    <div class="feat"><div class="ico">≡</div><b>Smart Catalog</b><span>Sentence-BERT search</span></div>
+    <div class="feat"><div class="ico">▶</div><b>Live Inspection</b><span>ONNX-Web preview</span></div>
+    <div class="feat"><div class="ico">⌘</div><b>Rental Module</b><span>Pre / Post handoff</span></div>
+    <div class="feat"><div class="ico">✓</div><b>CNIC Verify</b><span>Admin-gated trust</span></div>
+  </div>
+
+  <!-- ===== SYSTEM ARCHITECTURE ===== -->
+  <div class="h-section">System Architecture</div>
+  <div class="arch-box">
+    <svg viewBox="0 0 1140 320" width="100%" height="320">
+      <defs>
+        <marker id="mhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#ee7a3a"/>
+        </marker>
+        <marker id="mheadt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#2b8aa6"/>
+        </marker>
+      </defs>
+
+      <!-- Client -->
+      <rect x="20" y="40" width="130" height="60" class="o" rx="8"/>
+      <text x="85" y="68" text-anchor="middle" class="lbl">Web / Mobile</text>
+      <text x="85" y="86" text-anchor="middle" class="sm">Owner · Renter · Admin</text>
+
+      <rect x="20" y="120" width="130" height="60" class="o" rx="8"/>
+      <text x="85" y="148" text-anchor="middle" class="lbl">Live Camera</text>
+      <text x="85" y="166" text-anchor="middle" class="sm">ONNX-Web client model</text>
+
+      <rect x="20" y="200" width="130" height="60" class="o" rx="8"/>
+      <text x="85" y="228" text-anchor="middle" class="lbl">Cloudinary</text>
+      <text x="85" y="246" text-anchor="middle" class="sm">Image CDN · upload</text>
+
+      <!-- Next.js -->
+      <rect x="180" y="120" width="130" height="60" class="b" rx="8"/>
+      <text x="245" y="148" text-anchor="middle" class="lbl">Next.js 15</text>
+      <text x="245" y="166" text-anchor="middle" class="sm">Axios · JWT refresh</text>
+
+      <!-- API Gateway / Guards -->
+      <rect x="340" y="120" width="160" height="60" class="t" rx="8"/>
+      <text x="420" y="146" text-anchor="middle" class="lbl">NestJS API · /api/v1</text>
+      <text x="420" y="164" text-anchor="middle" class="sm">Throttle · JWT · Roles · Verify</text>
+
+      <!-- Service block -->
+      <rect x="530" y="20" width="290" height="280" class="b" rx="10"/>
+      <text x="675" y="42" text-anchor="middle" class="lbl">Domain Services (NestJS)</text>
+
+      <rect x="545" y="60" width="125" height="36" class="t" rx="4"/><text x="607" y="82" text-anchor="middle" class="sm">Auth · Users</text>
+      <rect x="680" y="60" width="125" height="36" class="t" rx="4"/><text x="742" y="82" text-anchor="middle" class="sm">Catalog · Cars</text>
+      <rect x="545" y="104" width="125" height="36" class="o" rx="4"/><text x="607" y="126" text-anchor="middle" class="sm">Damage Module</text>
+      <rect x="680" y="104" width="125" height="36" class="o" rx="4"/><text x="742" y="126" text-anchor="middle" class="sm">Cost Estimator</text>
+      <rect x="545" y="148" width="125" height="36" class="o" rx="4"/><text x="607" y="170" text-anchor="middle" class="sm">Parts Search</text>
+      <rect x="680" y="148" width="125" height="36" class="t" rx="4"/><text x="742" y="170" text-anchor="middle" class="sm">Listings · Rentals</text>
+      <rect x="545" y="192" width="125" height="36" class="t" rx="4"/><text x="607" y="214" text-anchor="middle" class="sm">Notifications</text>
+      <rect x="680" y="192" width="125" height="36" class="t" rx="4"/><text x="742" y="214" text-anchor="middle" class="sm">PDF Reports · Admin</text>
+      <rect x="545" y="236" width="260" height="36" class="b" rx="4"/><text x="675" y="258" text-anchor="middle" class="sm">Prisma ORM · TypeScript Domain Layer</text>
+
+      <!-- AI / Data tier -->
+      <rect x="850" y="20" width="270" height="60" class="o" rx="8"/>
+      <text x="985" y="44" text-anchor="middle" class="lbl">YOLOv8n Inference</text>
+      <text x="985" y="62" text-anchor="middle" class="sm">FastAPI · GPU/CPU fallback</text>
+
+      <rect x="850" y="92" width="270" height="60" class="o" rx="8"/>
+      <text x="985" y="116" text-anchor="middle" class="lbl">Gradient Boosting Model</text>
+      <text x="985" y="134" text-anchor="middle" class="sm">scikit-learn · pickled</text>
+
+      <rect x="850" y="164" width="270" height="60" class="t" rx="8"/>
+      <text x="985" y="188" text-anchor="middle" class="lbl">Sentence-BERT + FAISS</text>
+      <text x="985" y="206" text-anchor="middle" class="sm">Semantic part-search index</text>
+
+      <rect x="850" y="236" width="270" height="60" class="t" rx="8"/>
+      <text x="985" y="260" text-anchor="middle" class="lbl">PostgreSQL (Prisma · 8 tables)</text>
+      <text x="985" y="278" text-anchor="middle" class="sm">Users · Cars · Listings · Rentals · Images · Notifs</text>
+
+      <!-- arrows -->
+      <path class="ar" d="M150,150 L180,150"/>
+      <path class="ar" d="M310,150 L340,150"/>
+      <path class="ar t" d="M500,150 L530,150"/>
+      <path class="ar" d="M820,78 L850,50"/>
+      <path class="ar" d="M820,122 L850,122"/>
+      <path class="ar t" d="M820,166 L850,194"/>
+      <path class="ar t" d="M820,210 L850,266"/>
+      <path class="ar" d="M150,230 L420,200" stroke-dasharray="4 3"/>
+      <path class="ar t" d="M150,80 L180,140" stroke-dasharray="4 3"/>
+    </svg>
+  </div>
+
+  <!-- ===== WORKING PIPELINE ===== -->
+  <div class="h-section">Working Pipeline</div>
+  <div class="pipeline-row">
+    <div class="ps" data-num="1"><b>Capture</b>Owner uploads car photos or streams a live camera frame</div>
+    <div class="ps" data-num="2"><b>Pre-process</b>Resize · normalize · upload to Cloudinary</div>
+    <div class="ps" data-num="3"><b>Detect</b>YOLOv8n returns damage class + bounding box + score</div>
+    <div class="ps" data-num="4"><b>Estimate</b>Gradient Boosting outputs repair cost</div>
+    <div class="ps" data-num="5"><b>Recommend</b>Sentence-BERT ranks affordable parts</div>
+    <div class="ps" data-num="6"><b>Deliver</b>Annotated image + cost + parts → dashboard / PDF</div>
+  </div>
+
+  <!-- ===== RESULTS + DASHBOARD ===== -->
+  <div class="row r2" style="margin-top:14px">
+    <div>
+      <div class="h-section">Results &amp; Evaluation</div>
+      <div class="panel">
+        <h4>Detection Performance · mAP@0.5</h4>
+        <div class="bar-row">
+          <div class="lbl"><span>Glass Shatter</span><span>0.979</span></div>
+          <div class="bar"><span style="width:97.9%"></span></div>
+          <div class="lbl"><span>Tire Flat</span><span>0.934</span></div>
+          <div class="bar"><span style="width:93.4%"></span></div>
+          <div class="lbl"><span>Lamp Broken</span><span>0.871</span></div>
+          <div class="bar"><span style="width:87.1%"></span></div>
+          <div class="lbl"><span>Dent</span><span>0.61</span></div>
+          <div class="bar teal"><span style="width:61%"></span></div>
+          <div class="lbl"><span>Scratch</span><span>0.55</span></div>
+          <div class="bar teal"><span style="width:55%"></span></div>
+          <div class="lbl"><span>Crack</span><span>0.43</span></div>
+          <div class="bar teal"><span style="width:43%"></span></div>
+        </div>
+        <h4 style="margin-top:8px">Cost Model</h4>
+        <div style="font-size:11px">
+          Gradient Boosting selected after benchmarking against Linear Regression, Random Forest, Extra Trees — lowest RMSE on held-out validation split.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="h-section">Live Dashboard</div>
+      <div class="dashboard">
+        <div class="kpi-row">
+          <div class="kpi"><b>0.732</b><span>mAP@0.5</span></div>
+          <div class="kpi"><b>4.4ms</b><span>Inference</span></div>
+          <div class="kpi"><b>4 K</b><span>Train Imgs</span></div>
+          <div class="kpi"><b>6</b><span>Damage Classes</span></div>
+        </div>
+        <div class="chart-row">
+          <div class="chart">
+            <h5>Detections per scan (last 30 days)</h5>
+            <svg viewBox="0 0 280 90" width="100%" height="90">
+              <polyline points="0,75 25,60 50,68 75,40 100,55 125,30 150,42 175,22 200,38 225,18 250,28 280,12"
+                fill="none" stroke="#ee7a3a" stroke-width="2.5"/>
+              <polyline points="0,80 25,72 50,78 75,60 100,68 125,52 150,58 175,44 200,52 225,38 250,46 280,32"
+                fill="none" stroke="#2b8aa6" stroke-width="2" stroke-dasharray="3 3"/>
+              <line x1="0" y1="86" x2="280" y2="86" stroke="#dcd2c5"/>
+            </svg>
+          </div>
+          <div class="chart">
+            <h5>Damage Mix</h5>
+            <svg viewBox="0 0 100 80" width="100%" height="90">
+              <circle cx="50" cy="40" r="28" fill="none" stroke="#f3e2d1" stroke-width="14"/>
+              <circle cx="50" cy="40" r="28" fill="none" stroke="#ee7a3a" stroke-width="14"
+                stroke-dasharray="55 175" transform="rotate(-90 50 40)"/>
+              <circle cx="50" cy="40" r="28" fill="none" stroke="#2b8aa6" stroke-width="14"
+                stroke-dasharray="42 175" stroke-dashoffset="-55" transform="rotate(-90 50 40)"/>
+              <circle cx="50" cy="40" r="28" fill="none" stroke="#384655" stroke-width="14"
+                stroke-dasharray="30 175" stroke-dashoffset="-97" transform="rotate(-90 50 40)"/>
+              <text x="50" y="44" text-anchor="middle" font-size="10" font-weight="700" fill="#384655">CarDD</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== OFFERS + TECH ===== -->
+  <div class="row r2" style="margin-top:12px">
+    <div>
+      <div class="h-section">CARPER Offers</div>
+      <div class="panel">
+        <ul>
+          <li><b>Real-time damage detection</b> in 4.4 ms / image</li>
+          <li><b>Transparent repair cost</b> with model-confidence</li>
+          <li><b>Cheaper replacement parts</b> via semantic ranking</li>
+          <li><b>Owner · Rental · Admin</b> role-aware dashboards</li>
+          <li><b>Fully containerised</b> deployment with Docker</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="h-section">Tech Stack</div>
+      <div class="panel teal">
+        <div class="pill-row">
+          <span class="pill o">Next.js 15</span>
+          <span class="pill o">Tailwind</span>
+          <span class="pill o">React Query</span>
+          <span class="pill t">NestJS 11</span>
+          <span class="pill t">Prisma 7</span>
+          <span class="pill t">PostgreSQL</span>
+          <span class="pill">YOLOv8n</span>
+          <span class="pill">FastAPI</span>
+          <span class="pill">Gradient Boost</span>
+          <span class="pill">Sentence-BERT</span>
+          <span class="pill">ONNX-Web</span>
+          <span class="pill">Cloudinary</span>
+          <span class="pill">JWT · OAuth</span>
+          <span class="pill">Docker</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CONCLUSION ===== -->
+  <div class="h-section">Conclusion</div>
+  <div class="panel">
+    CARPER delivers <b>robust, scalable and intelligent</b> exterior-damage assessment through a hybrid AI pipeline.
+    Real-time YOLOv8n inference (4.4 ms · mAP@0.5 = 0.732), Gradient-Boosted cost estimation, and Sentence-BERT
+    part-recommendation collectively transform a fragmented manual process into a single, transparent web experience —
+    suitable for insurance automation, rental fleet operators, and private resale valuation.
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <div class="team">
+      <b>TEAM CARPER</b><br/>
+      Syed Wali Mohsin Naqvi (22K-4550) — Lead<br/>
+      Syed Ghalib Hussain Zaidi (22K-4536) · Syed Azhaan Ali (22K-4140)
+    </div>
+    <div class="sup">
+      <b>SUPERVISOR · Mr. Shoaib Raza</b>
+      FAST-NUCES · National University of Computer &amp; Emerging Sciences<br/>
+      k224550 · k224536 · k224140 @nu.edu.pk
+    </div>
+  </div>
+</div>
+</body>
+</html>

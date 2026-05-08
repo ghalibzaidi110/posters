@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>CARPER — The Car Problem Solver | Poster 3</title>
+<style>
+  :root{
+    --p1:#5b3aa8;
+    --p2:#3a5fcd;
+    --p3:#7c5dd1;
+    --pl:#efeaff;
+    --pl2:#f6f2ff;
+    --ink:#222;
+    --soft:#fafafe;
+    --line:#dcd6ee;
+    --accent:#ff6f5c;
+    --green:#2bb673;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#222;font-family:'Segoe UI',Helvetica,Arial,sans-serif;color:var(--ink)}
+  .poster{
+    width:1200px;height:1800px;
+    margin:30px auto;background:#fff;
+    box-shadow:0 0 40px rgba(0,0,0,.6);
+    overflow:hidden;position:relative;padding:30px 36px;
+  }
+
+  /* HEADER */
+  .top{
+    display:flex;align-items:center;justify-content:space-between;
+    background:linear-gradient(120deg,var(--p1) 0%,var(--p2) 100%);
+    color:#fff;padding:22px 28px;border-radius:14px;
+    box-shadow:0 6px 18px rgba(91,58,168,.35);
+  }
+  .top .left{display:flex;align-items:center;gap:18px}
+  .logo{
+    width:72px;height:72px;border-radius:18px;background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--p1);font-weight:900;font-size:26px;letter-spacing:.5px;
+    box-shadow:inset 0 -6px 0 rgba(0,0,0,.06);
+  }
+  .top h1{font-size:42px;font-weight:800;letter-spacing:1px}
+  .top h1 .ai{
+    background:#fff;color:var(--p1);padding:2px 10px;border-radius:8px;font-size:30px;
+    margin-left:6px;
+  }
+  .top h2{font-size:14px;font-weight:500;opacity:.95;margin-top:4px;letter-spacing:.5px}
+  .uni-tag{
+    background:#fff;color:var(--p1);font-weight:700;font-size:12px;
+    padding:10px 14px;border-radius:10px;text-align:right;line-height:1.5
+  }
+  .uni-tag b{display:block;color:var(--p2);font-size:13.5px}
+
+  /* SECTION HEADERS */
+  .h-pill{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--pl);color:var(--p1);
+    padding:8px 18px;border-radius:18px;
+    font-weight:800;font-size:14px;letter-spacing:.6px;
+    border:1px solid #d8ccfb;
+  }
+  .h-pill .num{
+    background:var(--p1);color:#fff;width:22px;height:22px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:12px;
+  }
+  .h-pill.alt{background:#fff;border:1.5px solid var(--p1)}
+
+  .row{display:grid;gap:14px;margin-top:8px}
+  .r2{grid-template-columns:1fr 1fr}
+  .r-13-07{grid-template-columns:1.3fr .7fr}
+  .r-08-12{grid-template-columns:.8fr 1.2fr}
+
+  .panel{
+    background:#fff;border:1.5px solid var(--line);border-radius:12px;
+    padding:14px 16px;font-size:12px;line-height:1.55;
+  }
+  .panel.glass{background:linear-gradient(180deg,var(--pl2),#fff);border-color:#cdc1f5}
+  .panel ul{padding-left:18px;margin-top:4px}
+  .panel ul li{margin-bottom:3px}
+  .panel h4{color:var(--p1);font-size:13px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+
+  /* HERO ABSTRACT */
+  .abstract{
+    margin-top:14px;background:linear-gradient(180deg,#fff,var(--pl2));
+    border:1.5px solid #d8ccfb;border-radius:14px;padding:14px 18px;
+    font-size:12px;line-height:1.55;color:#333
+  }
+
+  /* OBJECTIVES */
+  .obj-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+  .obj{
+    background:#fff;border:1.5px solid var(--line);border-radius:12px;
+    padding:14px;font-size:11.5px;line-height:1.5;position:relative;
+  }
+  .obj .badge{
+    background:var(--p1);color:#fff;font-size:11px;font-weight:800;
+    width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    position:absolute;top:-12px;left:14px;box-shadow:0 4px 10px rgba(91,58,168,.35)
+  }
+  .obj h5{color:var(--p1);font-size:13px;font-weight:800;margin:6px 0 4px;letter-spacing:.3px}
+
+  /* ARCHITECTURE LAYERS */
+  .arch-wrap{
+    margin-top:10px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;
+  }
+  .layer{
+    display:grid;grid-template-columns:170px 1fr;gap:14px;
+    padding:14px 0;border-bottom:1px dashed var(--line);
+  }
+  .layer:last-child{border-bottom:none}
+  .layer .ltitle{
+    background:linear-gradient(180deg,var(--pl),var(--pl2));
+    border:1.5px solid #cdc1f5;border-radius:10px;padding:10px;
+    text-align:center;
+  }
+  .layer .ltitle b{display:block;color:var(--p1);font-size:13px;font-weight:800;letter-spacing:.3px}
+  .layer .ltitle span{display:block;color:#555;font-size:10.5px;line-height:1.4;margin-top:4px}
+  .layer .lnum{
+    background:var(--p1);color:#fff;width:28px;height:28px;border-radius:50%;
+    margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px
+  }
+  .layer .lcontent{
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;
+  }
+  .lc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+  .chip{
+    background:var(--pl2);border:1px solid #d8ccfb;border-radius:6px;
+    padding:6px 8px;font-size:10.5px;color:#3c2e6f;text-align:center;font-weight:600;line-height:1.3
+  }
+  .chip.s{background:#ffefe9;border-color:#ffd0c5;color:#9a3a26}
+  .chip.g{background:#e9fbf1;border-color:#bcebd1;color:#1d6a44}
+  .chip.b{background:#e7eefe;border-color:#c2d3fb;color:#1d3a8a}
+
+  /* DATA FLOW PIPELINE */
+  .pipeline{
+    background:linear-gradient(95deg,var(--pl2),#fff);
+    border:1.5px solid #cdc1f5;border-radius:14px;padding:14px;margin-top:8px;
+  }
+  .pflow{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center}
+  .pflow .step{padding:8px 6px;font-size:10.5px;line-height:1.3}
+  .pflow .step .ci{
+    width:42px;height:42px;border-radius:50%;background:#fff;border:2px solid var(--p1);
+    color:var(--p1);font-weight:800;font-size:16px;
+    margin:0 auto 6px;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 8px rgba(91,58,168,.18)
+  }
+  .pflow .step b{display:block;color:var(--p1);font-size:11px;font-weight:800}
+  .pflow .step.alt .ci{background:var(--p1);color:#fff}
+
+  /* RESULTS ROW */
+  .res-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:8px}
+  .res{
+    background:#fff;border:1.5px solid var(--line);border-radius:12px;
+    padding:10px 8px;text-align:center;
+  }
+  .res .ci{
+    width:36px;height:36px;border-radius:50%;background:var(--pl);
+    margin:0 auto 4px;display:flex;align-items:center;justify-content:center;
+    color:var(--p1);font-weight:800;font-size:16px
+  }
+  .res b{display:block;color:var(--p1);font-size:13px;margin:2px 0}
+  .res span{font-size:10.5px;color:#555;line-height:1.35}
+
+  /* METRICS */
+  .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px}
+  .metric{
+    background:linear-gradient(160deg,var(--p1),var(--p2));
+    color:#fff;border-radius:12px;padding:12px 8px;text-align:center;
+  }
+  .metric b{display:block;font-size:22px;font-weight:800}
+  .metric span{font-size:10.5px;letter-spacing:.4px;opacity:.92}
+
+  /* CHART AREA */
+  .chart-card{
+    background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px;
+  }
+  .barlist{font-size:11px;line-height:1.55}
+  .barlist .lbl{display:flex;justify-content:space-between;margin-top:4px}
+  .bar{height:8px;background:#ece4ff;border-radius:4px;overflow:hidden}
+  .bar > span{display:block;height:100%;background:linear-gradient(90deg,var(--p3),var(--p1))}
+  .bar.alt > span{background:linear-gradient(90deg,#ff9b8c,var(--accent))}
+
+  /* FOOTER */
+  .footer{
+    margin-top:16px;background:linear-gradient(120deg,var(--p1),var(--p2));
+    color:#fff;padding:14px 22px;border-radius:14px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .footer .team{font-size:12px;line-height:1.5}
+  .footer .team b{color:#ffd9d2;letter-spacing:.5px}
+  .footer .sup{font-size:11.5px;text-align:right;line-height:1.5}
+  .footer .sup b{color:#ffd9d2;display:block;letter-spacing:.6px}
+
+  /* SVG */
+  svg .b{fill:#fff;stroke:#dcd6ee;stroke-width:1.4}
+  svg .p{fill:#efeaff;stroke:#5b3aa8;stroke-width:1.5}
+  svg .a{fill:#ffefe9;stroke:#ff6f5c;stroke-width:1.5}
+  svg .lbl{font:700 11px 'Segoe UI';fill:#3c2e6f}
+  svg .sm{font:500 9.5px 'Segoe UI';fill:#555}
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- HEADER -->
+  <div class="top">
+    <div class="left">
+      <div class="logo">CR</div>
+      <div>
+        <h1>CARPER <span class="ai">AI</span></h1>
+        <h2>Automated Vehicle Damage Detection · Repair-Cost Estimation · Smart Parts Marketplace</h2>
+      </div>
+    </div>
+    <div class="uni-tag">
+      <b>FAST-NUCES</b>
+      Department of Computer Science<br/>FYP · 2026
+    </div>
+  </div>
+
+  <!-- ABSTRACT -->
+  <div style="margin-top:14px"><div class="h-pill"><span class="num">A</span>ABSTRACT</div></div>
+  <div class="abstract">
+    <b>CARPER — The Car Problem Solver</b> is an intelligent web platform that unifies computer vision,
+    machine-learning regression, and natural-language semantic search to streamline vehicle damage assessment.
+    The platform automates exterior-damage detection, repair-cost estimation, and affordable replacement-part
+    recommendation. Built with <b>Next.js 15, NestJS 11, PostgreSQL, YOLOv8n, Gradient Boosting</b> and
+    <b>Sentence-BERT</b>, it delivers transparent assessments, accelerates insurance &amp; rental workflows, and
+    lowers the cost of vehicle inspection for owners, businesses, and verifiers.
+  </div>
+
+  <!-- OBJECTIVES -->
+  <div style="margin-top:14px"><div class="h-pill alt"><span class="num">O</span>OBJECTIVES</div></div>
+  <div class="obj-grid">
+    <div class="obj">
+      <div class="badge">01</div>
+      <h5 style="margin-top:8px">End-to-End Web Platform</h5>
+      Build a scalable, secure, role-aware web platform integrating AI modules for damage detection,
+      cost estimation, parts recommendation, and inspection record-keeping for individual owners and rental businesses.
+    </div>
+    <div class="obj">
+      <div class="badge">02</div>
+      <h5 style="margin-top:8px">Decision Accuracy</h5>
+      Improve assessment accuracy and decision speed by leveraging YOLOv8n object detection,
+      Gradient-Boosted regression, and Sentence-BERT semantic similarity for transparent, data-driven outcomes.
+    </div>
+  </div>
+
+  <!-- METHODOLOGY / SYSTEM ARCHITECTURE -->
+  <div style="margin-top:14px"><div class="h-pill"><span class="num">M</span>METHODOLOGY · SYSTEM ARCHITECTURE</div></div>
+  <div class="arch-wrap">
+
+    <!-- LAYER 1: PRESENTATION -->
+    <div class="layer">
+      <div class="ltitle">
+        <div class="lnum">1</div>
+        <b>PRESENTATION LAYER</b>
+        <span>Frontend · Built with Next.js 15 (App Router) for interactive, responsive dashboards.</span>
+      </div>
+      <div class="lcontent">
+        <div class="lc-grid">
+          <div class="chip">Next.js 15</div>
+          <div class="chip">Owner Dashboard</div>
+          <div class="chip">Rental Dashboard</div>
+          <div class="chip">Admin Console</div>
+          <div class="chip">Marketplace UI</div>
+          <div class="chip">Damage Scanner</div>
+          <div class="chip">Live Camera (ONNX)</div>
+          <div class="chip">Reports / PDF</div>
+          <div class="chip">Tailwind · Radix</div>
+          <div class="chip">React Query · Zod</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYER 2: APPLICATION -->
+    <div class="layer">
+      <div class="ltitle">
+        <div class="lnum">2</div>
+        <b>APPLICATION LAYER</b>
+        <span>Backend · NestJS 11 REST API at /api/v1 with global guards &amp; AI orchestration.</span>
+      </div>
+      <div class="lcontent">
+        <div class="lc-grid">
+          <div class="chip">Auth · OAuth</div>
+          <div class="chip">JWT + Refresh</div>
+          <div class="chip">Roles Guard</div>
+          <div class="chip">Verification Guard</div>
+          <div class="chip">Throttler</div>
+          <div class="chip s">Damage Module</div>
+          <div class="chip s">Cost Estimator</div>
+          <div class="chip s">Semantic Search</div>
+          <div class="chip">Catalog · Cars</div>
+          <div class="chip">Listings · Rentals</div>
+          <div class="chip">Notifications</div>
+          <div class="chip">PDF Reports</div>
+          <div class="chip">Cloudinary Adapter</div>
+          <div class="chip">Prisma Client</div>
+          <div class="chip">WebSocket Live</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px;font-size:10.5px;color:#555;text-align:center">
+          <div>📨 Resume of upload routes</div>
+          <div>🔐 Authentication &amp; authorization</div>
+          <div>🧠 AI orchestration calls</div>
+          <div>📄 Report generation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYER 3: DATA & AI -->
+    <div class="layer">
+      <div class="ltitle">
+        <div class="lnum">3</div>
+        <b>DATA &amp; AI LAYER</b>
+        <span>Storage &amp; AI Services · Multi-store setup for relational data, vector embeddings &amp; ML inference.</span>
+      </div>
+      <div class="lcontent">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:start">
+          <div>
+            <div style="font-size:11px;color:var(--p1);font-weight:700;margin-bottom:4px">Structured · Relational</div>
+            <div class="lc-grid" style="grid-template-columns:repeat(2,1fr)">
+              <div class="chip b">PostgreSQL</div>
+              <div class="chip b">Prisma 7</div>
+              <div class="chip b">Users · Cars</div>
+              <div class="chip b">Listings · Rentals</div>
+              <div class="chip b">Images · Versions</div>
+              <div class="chip b">Notifications</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--p1);font-weight:700;margin-bottom:4px">AI &amp; Vector Services</div>
+            <div class="lc-grid" style="grid-template-columns:repeat(2,1fr)">
+              <div class="chip s">YOLOv8n (FastAPI)</div>
+              <div class="chip s">CarDD Dataset 4 K</div>
+              <div class="chip s">Gradient Boosting</div>
+              <div class="chip g">Sentence-BERT</div>
+              <div class="chip g">FAISS Index</div>
+              <div class="chip">Cloudinary CDN</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WORKING PIPELINE -->
+  <div style="margin-top:14px"><div class="h-pill"><span class="num">P</span>WORKING PIPELINE · DATA FLOW</div></div>
+  <div class="pipeline">
+    <div class="pflow">
+      <div class="step"><div class="ci">📤</div><b>Upload</b>Car images via web/camera</div>
+      <div class="step alt"><div class="ci">🧹</div><b>Pre-process</b>Resize · normalize · CDN</div>
+      <div class="step"><div class="ci">🎯</div><b>Detect</b>YOLOv8n · 6 damage classes</div>
+      <div class="step alt"><div class="ci">🔬</div><b>Severity</b>Per-part class &amp; confidence</div>
+      <div class="step"><div class="ci">💲</div><b>Estimate</b>Gradient Boosting cost</div>
+      <div class="step alt"><div class="ci">🔎</div><b>Recommend</b>Sentence-BERT parts</div>
+      <div class="step"><div class="ci">📑</div><b>Report</b>Annotated PDF · dashboard</div>
+    </div>
+  </div>
+
+  <!-- RESULT & ANALYSIS -->
+  <div style="margin-top:14px"><div class="h-pill"><span class="num">R</span>RESULTS &amp; ANALYSIS</div></div>
+  <div class="metric-row">
+    <div class="metric"><b>0.732</b><span>Overall mAP@0.5</span></div>
+    <div class="metric"><b>4.4 ms</b><span>Inference / image</span></div>
+    <div class="metric"><b>4,000</b><span>CarDD Train Imgs</span></div>
+    <div class="metric"><b>6 / 4</b><span>Damage cls / cost models</span></div>
+  </div>
+
+  <div class="row r2" style="margin-top:10px">
+    <div class="chart-card">
+      <h4 style="color:var(--p1);font-size:13px;margin-bottom:6px;text-transform:uppercase">Per-Class mAP@0.5</h4>
+      <div class="barlist">
+        <div class="lbl"><span>Glass Shatter</span><span>0.979</span></div><div class="bar"><span style="width:97.9%"></span></div>
+        <div class="lbl"><span>Tire Flat</span><span>0.934</span></div><div class="bar"><span style="width:93.4%"></span></div>
+        <div class="lbl"><span>Lamp Broken</span><span>0.871</span></div><div class="bar"><span style="width:87.1%"></span></div>
+        <div class="lbl"><span>Dent</span><span>0.61</span></div><div class="bar alt"><span style="width:61%"></span></div>
+        <div class="lbl"><span>Scratch</span><span>0.55</span></div><div class="bar alt"><span style="width:55%"></span></div>
+        <div class="lbl"><span>Crack</span><span>0.43</span></div><div class="bar alt"><span style="width:43%"></span></div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h4 style="color:var(--p1);font-size:13px;margin-bottom:6px;text-transform:uppercase">Cost Model Benchmark — RMSE (lower is better)</h4>
+      <svg viewBox="0 0 380 180" width="100%" height="170">
+        <!-- axes -->
+        <line x1="50" y1="20" x2="50" y2="150" stroke="#bbb"/>
+        <line x1="50" y1="150" x2="370" y2="150" stroke="#bbb"/>
+        <text x="50" y="14" class="sm">RMSE</text>
+        <!-- bars -->
+        <rect x="80"  y="60"  width="50" height="90" fill="#5b3aa8"/>
+        <rect x="155" y="80"  width="50" height="70" fill="#7c5dd1"/>
+        <rect x="230" y="100" width="50" height="50" fill="#a78cee"/>
+        <rect x="305" y="115" width="50" height="35" fill="#ff6f5c"/>
+        <text x="105" y="167" text-anchor="middle" class="sm">Linear Reg</text>
+        <text x="180" y="167" text-anchor="middle" class="sm">Random Forest</text>
+        <text x="255" y="167" text-anchor="middle" class="sm">Extra Trees</text>
+        <text x="330" y="167" text-anchor="middle" class="sm" style="font-weight:700;fill:#ff6f5c">Gradient Boost ★</text>
+        <text x="105" y="55"  text-anchor="middle" class="sm">High</text>
+        <text x="180" y="75"  text-anchor="middle" class="sm">Mid</text>
+        <text x="255" y="95"  text-anchor="middle" class="sm">Low</text>
+        <text x="330" y="110" text-anchor="middle" class="sm" style="font-weight:700;fill:#ff6f5c">Lowest</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- WHAT IT DELIVERS -->
+  <div class="res-row" style="margin-top:14px">
+    <div class="res"><div class="ci">⚡</div><b>Real-Time</b><span>Sub-5 ms YOLOv8n inference enables instant feedback.</span></div>
+    <div class="res"><div class="ci">🎯</div><b>Accurate</b><span>Multi-class detection with strong per-class mAP scores.</span></div>
+    <div class="res"><div class="ci">💵</div><b>Transparent Cost</b><span>Data-driven repair quotes via Gradient Boosting.</span></div>
+    <div class="res"><div class="ci">🔍</div><b>Smart Search</b><span>Sentence-BERT ranks affordable replacement parts.</span></div>
+    <div class="res"><div class="ci">📦</div><b>Containerised</b><span>Docker-deployed end-to-end stack ready to scale.</span></div>
+  </div>
+
+  <!-- KEY REFERENCES -->
+  <div class="row r-13-07" style="margin-top:14px">
+    <div>
+      <div class="h-pill alt"><span class="num">K</span>KEY REFERENCES</div>
+      <div class="panel" style="margin-top:8px">
+        <ol style="padding-left:18px;line-height:1.55;font-size:11.5px">
+          <li>J. Redmon &amp; A. Farhadi, <i>YOLOv8</i> — Ultralytics, 2023.</li>
+          <li>X. Wang et al., <b>CarDD: A New Dataset for Vision-Based Car Damage Detection</b>, IEEE T-ITS, 2023.</li>
+          <li>J. Friedman, <i>Greedy Function Approximation: A Gradient Boosting Machine</i>, Annals of Statistics, 2001.</li>
+          <li>N. Reimers &amp; I. Gurevych, <b>Sentence-BERT</b>: Sentence Embeddings using Siamese BERT-Networks, EMNLP 2019.</li>
+          <li>NestJS &amp; Next.js Official Documentation, accessed 2026.</li>
+        </ol>
+      </div>
+    </div>
+    <div>
+      <div class="h-pill alt"><span class="num">C</span>CONCLUSION</div>
+      <div class="panel glass" style="margin-top:8px">
+        CARPER demonstrates that a <b>lightweight YOLOv8n</b> trained on CarDD can deliver competitive
+        multi-class damage detection at <b>real-time</b> speeds — <b>0.732 mAP@0.5</b> overall and standout
+        results on Glass Shatter (0.979), Tire Flat (0.934) &amp; Lamp Broken (0.871). Coupled with a
+        Gradient-Boosting cost estimator and Sentence-BERT-driven part recommendation, CARPER is a complete,
+        containerised, web-deployed automotive-assessment tool ready for insurance, rental, and resale workflows.
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="team">
+      <b>TEAM CARPER</b><br/>
+      Syed Wali Mohsin Naqvi (22K-4550) — Lead<br/>
+      Syed Ghalib Hussain Zaidi (22K-4536) · Syed Azhaan Ali (22K-4140)
+    </div>
+    <div class="sup">
+      <b>SUPERVISOR · Mr. Shoaib Raza</b>
+      FAST-NUCES · National University of Computer &amp; Emerging Sciences<br/>
+      k224550 · k224536 · k224140 @nu.edu.pk
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
