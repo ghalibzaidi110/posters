@@ -2,130 +2,157 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>CARPER · System Architecture · Embed</title>
+<title>CARPER · System Architecture · 3-Layer Horizontal</title>
 <style>
   :root{
-    --bg:#0a1a23;
-    --bg-2:#0e2530;
-    --pill:#143c6b;
+    --bg:#f4f7fb;
+    --paper:#ffffff;
+    --pill:#0d3e7e;
     --pill-2:#1c5896;
-    --cyan:#5dd6ff;
-    --cyan-2:#82e1ff;
-    --tri:#1454a3;
-    --tri-2:#0d3e7e;
-    --line:rgba(93,214,255,.32);
-    --soft:#cfe7f5;
-    --muted:#88a4bc;
-    --arrow:#ee7a3a;
-    --arrow-2:#d65d1d;
-    --tier-fe:rgba(28,88,150,.20);
-    --tier-be:rgba(28,123,165,.20);
-    --tier-ai:rgba(124,93,209,.20);
-    --tier-db:rgba(43,182,115,.16);
+    --cyan:#1c7ba5;
+    --cyan-2:#2b9cce;
+    --line:#dbe2ec;
+    --line-2:#c5d2e0;
+    --ink:#0a2a52;
+    --ink-2:#2c3e50;
+    --muted:#5a6b7d;
+    --soft:#eef4fb;
+    --soft-2:#e3edf8;
+    --arrow:#1c5896;
+    --arrow-2:#0d3e7e;
+    --tier-1:#fff7ec;
+    --tier-2:#eef4fb;
+    --tier-3:#f1ecfb;
+    --accent-1:#e8902a;
+    --accent-2:#1c7ba5;
+    --accent-3:#7c5dd1;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:#222;font-family:'Segoe UI',Helvetica,Arial,sans-serif;color:#fff}
-  /* canvas tuned to fit a poster section · scale down freely when exporting */
+  html,body{background:#222;font-family:'Segoe UI',Helvetica,Arial,sans-serif;color:var(--ink)}
+
   .canvas{
-    width:1200px;height:720px;margin:30px auto;
+    width:1600px;height:780px;margin:30px auto;
     background:
-      radial-gradient(ellipse at 70% 5%,rgba(27,82,135,.45) 0%,transparent 50%),
-      radial-gradient(ellipse at 0% 100%,rgba(15,76,179,.30) 0%,transparent 40%),
+      radial-gradient(ellipse at 50% 0%,rgba(28,123,165,.06) 0%,transparent 50%),
       var(--bg);
-    box-shadow:0 0 40px rgba(0,0,0,.6);
+    box-shadow:0 0 40px rgba(0,0,0,.5);
     overflow:hidden;position:relative;
-    padding:18px 24px;
+    padding:36px 36px 32px;
   }
-  /* circuit grid — same as poster */
   .canvas::before{
     content:'';position:absolute;inset:0;
-    background-image:
-      linear-gradient(rgba(93,214,255,.045) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(93,214,255,.045) 1px,transparent 1px);
-    background-size:36px 36px;pointer-events:none;
+    background-image:radial-gradient(circle at 1px 1px,rgba(28,88,150,.07) 1px,transparent 0);
+    background-size:24px 24px;pointer-events:none;
   }
 
-  /* DIAGRAM */
+  /* 3 thinner layer columns + 2 wider arrow columns */
   .diagram{
     position:relative;z-index:4;height:100%;
-    display:flex;flex-direction:column;gap:8px;
+    display:grid;
+    grid-template-columns: 1fr 170px 1fr 170px 1fr;
+    gap:0;align-items:stretch;
   }
-  .tier{
-    background:rgba(8,28,42,.55);
+
+  /* LAYER COLUMN */
+  .layer{
+    background:var(--paper);
     border:1.5px solid var(--line);
-    border-radius:14px;
-    padding:12px 16px 10px;
+    border-radius:18px;
+    padding:24px 22px 22px;
+    box-shadow:0 6px 20px rgba(28,88,150,.08);
+    display:flex;flex-direction:column;
     position:relative;
-    box-shadow:0 4px 18px rgba(0,0,0,.35),inset 0 0 24px rgba(93,214,255,.04);
   }
-  .tier-tag{
-    position:absolute;top:-12px;left:18px;
-    background:linear-gradient(180deg,var(--pill-2),var(--pill));
-    color:#fff;font-weight:800;font-size:11px;letter-spacing:1.5px;
-    padding:5px 14px;border-radius:14px;
-    box-shadow:0 3px 8px rgba(0,0,0,.45);
-    border:1px solid var(--cyan);
-  }
-  .tier.fe{background:linear-gradient(180deg,var(--tier-fe),rgba(8,28,42,.55))}
-  .tier.be{background:linear-gradient(180deg,var(--tier-be),rgba(8,28,42,.55))}
-  .tier.ai{background:linear-gradient(180deg,var(--tier-ai),rgba(8,28,42,.55))}
-  .tier.db{background:linear-gradient(180deg,var(--tier-db),rgba(8,28,42,.55))}
+  .layer.l1{border-top:5px solid var(--accent-1)}
+  .layer.l2{border-top:5px solid var(--accent-2)}
+  .layer.l3{border-top:5px solid var(--accent-3)}
 
-  .tier-row{
-    display:flex;justify-content:space-around;align-items:center;
-    gap:10px;flex-wrap:wrap;padding-top:4px;
+  /* HEADER inside each layer */
+  .layer-head{
+    display:flex;align-items:center;gap:14px;
+    padding-bottom:14px;margin-bottom:16px;
+    border-bottom:2px dashed var(--line);
   }
+  .layer-num{
+    flex:0 0 46px;width:46px;height:46px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:900;font-size:18px;letter-spacing:.5px;
+    box-shadow:0 4px 10px rgba(0,0,0,.18);
+  }
+  .l1 .layer-num{background:linear-gradient(180deg,#f4b35a,var(--accent-1))}
+  .l2 .layer-num{background:linear-gradient(180deg,var(--cyan-2),var(--accent-2))}
+  .l3 .layer-num{background:linear-gradient(180deg,#a48ce0,var(--accent-3))}
+  .layer-title h3{
+    color:var(--ink);font-size:18px;font-weight:800;letter-spacing:.5px;line-height:1.1;
+  }
+  .layer-title .sub{color:var(--muted);font-size:11.5px;font-style:italic;letter-spacing:.3px;margin-top:2px}
 
-  /* COMPONENT */
-  .comp-card{
-    background:rgba(255,255,255,.96);
-    border:1.5px solid var(--cyan);
-    border-radius:12px;padding:8px 12px;
-    display:flex;align-items:center;gap:8px;
-    box-shadow:0 4px 12px rgba(0,0,0,.4),0 0 12px rgba(93,214,255,.18);
-    min-height:54px;
-  }
-  .comp-card.tall{flex-direction:column;text-align:center;padding:10px;min-height:78px;gap:4px}
-  .comp-card .logo{flex:0 0 34px;width:34px;height:34px;display:flex;align-items:center;justify-content:center}
-  .comp-card .logo svg{width:34px;height:34px}
-  .comp-card.tall .logo{width:42px;height:42px}
-  .comp-card.tall .logo svg{width:42px;height:42px}
-  .comp-card .meta{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2}
-  .comp-card.tall .meta{align-items:center}
-  .comp-card .name{color:#0a2a52;font-weight:800;font-size:12px;letter-spacing:.2px}
-  .comp-card .role{color:#5a6b7d;font-size:10px}
+  /* component list */
+  .comp-list{display:flex;flex-direction:column;gap:9px;flex:1}
 
-  .plus{font-size:22px;font-weight:800;color:var(--arrow);user-select:none;text-shadow:0 0 10px rgba(238,122,58,.5)}
+  .comp{
+    background:#fff;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:9px 12px;
+    display:flex;align-items:center;gap:11px;
+    box-shadow:0 2px 6px rgba(28,88,150,.05);
+    transition:transform .15s;
+  }
+  .l1 .comp{border-left:3px solid var(--accent-1)}
+  .l2 .comp{border-left:3px solid var(--accent-2)}
+  .l3 .comp{border-left:3px solid var(--accent-3)}
 
-  /* ARROWS */
-  .arrows{
-    position:relative;height:32px;display:flex;justify-content:center;align-items:center;
-    margin:-2px 0;
+  .comp .logo{flex:0 0 32px;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+  .comp .logo svg{width:32px;height:32px}
+  .comp .meta{display:flex;flex-direction:column;line-height:1.22;flex:1;min-width:0}
+  .comp .name{color:var(--ink);font-weight:800;font-size:12.5px;letter-spacing:.2px}
+  .comp .role{color:var(--muted);font-size:10.5px}
+
+  /* sub-section header inside layer 3 */
+  .sub-head{
+    color:var(--accent-3);font-size:11px;font-weight:800;letter-spacing:1.4px;
+    margin:6px 0 4px;text-transform:uppercase;
   }
-  .arrow-down{
-    width:0;height:0;
-    border-left:11px solid transparent;border-right:11px solid transparent;
-    border-top:14px solid var(--arrow);
-    filter:drop-shadow(0 0 6px rgba(238,122,58,.6));
+  .sub-head:first-child{margin-top:0}
+
+  /* HORIZONTAL ARROW — vertical stack: label · line+head · label */
+  .h-arrow{
+    align-self:center;justify-self:stretch;
+    width:100%;
+    display:flex;flex-direction:column;align-items:stretch;
+    gap:14px;padding:0 8px;
   }
-  .arrow-line{width:5px;height:18px;background:var(--arrow);box-shadow:0 0 6px rgba(238,122,58,.5)}
-  .arrow-stack{display:flex;flex-direction:column;align-items:center;gap:0}
-  .arrow-label{
-    position:absolute;
-    background:rgba(8,28,42,.95);border:1.5px solid var(--arrow);
-    color:#fff;padding:2px 10px;border-radius:12px;
-    font-size:10.5px;font-weight:700;letter-spacing:.4px;
-    box-shadow:0 2px 8px rgba(0,0,0,.45),0 0 8px rgba(238,122,58,.3);
+  .h-arrow .label{
+    background:#fff;border:1.5px solid var(--arrow);
+    color:var(--arrow);padding:6px 12px;border-radius:14px;
+    font-size:12px;font-weight:700;letter-spacing:.5px;
+    text-align:center;
+    box-shadow:0 3px 8px rgba(13,62,126,.18);
     white-space:nowrap;
   }
-  .arrow-label.l{left:30%;top:8px}
-  .arrow-label.r{right:30%;top:8px}
-  .arrow-label b{color:var(--arrow)}
+  .h-arrow .line-wrap{
+    position:relative;width:100%;height:8px;
+  }
+  .h-arrow .line{
+    position:absolute;left:0;right:20px;top:50%;transform:translateY(-50%);
+    height:6px;
+    background:linear-gradient(90deg,var(--cyan-2),var(--arrow));
+    border-radius:3px;
+  }
+  .h-arrow .head{
+    position:absolute;right:0;top:50%;transform:translateY(-50%);
+    width:0;height:0;
+    border-left:20px solid var(--arrow);
+    border-top:12px solid transparent;border-bottom:12px solid transparent;
+    filter:drop-shadow(0 2px 3px rgba(13,62,126,.25));
+  }
 
-  .split{display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;margin-top:4px}
-  .split::before{
-    content:'';position:absolute;left:50%;top:-14px;width:2px;height:14px;background:var(--arrow);
-    transform:translateX(-50%);box-shadow:0 0 8px rgba(238,122,58,.5);
+  /* tiny dot for layer accent */
+  .layer-num::after{
+    content:'';position:absolute;width:14px;height:14px;border-radius:50%;
+    background:#fff;opacity:.3;
+    transform:translate(-10px,-12px);
   }
 </style>
 </head>
@@ -134,12 +161,18 @@
 
   <div class="diagram">
 
-    <!-- TIER 1 · CLIENT / PRESENTATION -->
-    <div class="tier fe">
-      <div class="tier-tag">CLIENT · PRESENTATION TIER</div>
-      <div class="tier-row">
+    <!-- ============ LAYER 1: PRESENTATION ============ -->
+    <div class="layer l1">
+      <div class="layer-head">
+        <div class="layer-num">01</div>
+        <div class="layer-title">
+          <h3>PRESENTATION</h3>
+          <div class="sub">Client · web &amp; mobile</div>
+        </div>
+      </div>
 
-        <div class="comp-card">
+      <div class="comp-list">
+        <div class="comp">
           <div class="logo">
             <svg viewBox="0 0 100 100">
               <circle cx="50" cy="50" r="8" fill="#61dafb"/>
@@ -151,9 +184,7 @@
           <div class="meta"><div class="name">React 18</div><div class="role">UI components</div></div>
         </div>
 
-        <span class="plus">+</span>
-
-        <div class="comp-card">
+        <div class="comp">
           <div class="logo">
             <svg viewBox="0 0 100 100">
               <circle cx="50" cy="50" r="48" fill="#000"/>
@@ -161,23 +192,19 @@
               <rect x="60" y="28" width="6" height="34" fill="#fff"/>
             </svg>
           </div>
-          <div class="meta"><div class="name">Next.js 15</div><div class="role">App Router</div></div>
+          <div class="meta"><div class="name">Next.js 15</div><div class="role">App Router · SSR</div></div>
         </div>
 
-        <span class="plus">+</span>
-
-        <div class="comp-card">
+        <div class="comp">
           <div class="logo">
             <svg viewBox="0 0 100 70">
               <path d="M50 8 C 30 8 23 18 21 28 C 26 22 32 19 38 22 C 42 24 45 27 49 30 C 54 35 60 39 70 39 C 86 39 92 28 95 18 C 90 24 84 27 78 25 C 74 23 71 20 67 16 C 63 12 58 8 50 8 Z M 30 40 C 14 40 7 50 5 60 C 10 54 16 51 22 54 C 26 56 28 59 33 62 C 37 66 43 70 53 70 C 69 70 76 60 79 50 C 74 56 68 59 62 56 C 58 54 55 51 51 47 C 47 43 42 40 30 40 Z" fill="#06b6d4"/>
             </svg>
           </div>
-          <div class="meta"><div class="name">Tailwind</div><div class="role">styling</div></div>
+          <div class="meta"><div class="name">Tailwind CSS</div><div class="role">utility styling</div></div>
         </div>
 
-        <span class="plus">+</span>
-
-        <div class="comp-card">
+        <div class="comp">
           <div class="logo">
             <svg viewBox="0 0 100 100">
               <polygon points="50,5 90,28 90,72 50,95 10,72 10,28" fill="#fff" stroke="#0a2a52" stroke-width="3"/>
@@ -191,38 +218,58 @@
               <line x1="68" y1="55" x2="50" y2="75" stroke="#0a2a52" stroke-width="2"/>
             </svg>
           </div>
-          <div class="meta"><div class="name">ONNX-Web</div><div class="role">live YOLOv8n</div></div>
+          <div class="meta"><div class="name">ONNX-Web</div><div class="role">live YOLOv8n in-browser</div></div>
         </div>
 
-        <span class="plus">+</span>
-
-        <div class="comp-card">
+        <div class="comp">
           <div class="logo">
             <svg viewBox="0 0 100 100">
               <rect x="10" y="10" width="80" height="80" rx="14" fill="#ff4154"/>
               <text x="50" y="64" text-anchor="middle" font-size="44" font-weight="900" fill="#fff" font-family="Arial">Q</text>
             </svg>
           </div>
-          <div class="meta"><div class="name">React Query</div><div class="role">server state</div></div>
+          <div class="meta"><div class="name">React Query</div><div class="role">server state · cache</div></div>
+        </div>
+
+        <div class="comp">
+          <div class="logo">
+            <svg viewBox="0 0 100 100">
+              <rect x="22" y="8" width="56" height="84" rx="8" fill="#0a2a52"/>
+              <rect x="26" y="18" width="48" height="60" rx="2" fill="#1c5896"/>
+              <circle cx="36" cy="22" r="1.5" fill="#dc4040"/>
+              <circle cx="50" cy="48" r="14" fill="#0a2a52"/>
+              <circle cx="50" cy="48" r="9" fill="#1c7ba5"/>
+              <circle cx="50" cy="48" r="4" fill="#82e1ff"/>
+              <rect x="46" y="84" width="8" height="2" rx="1" fill="#fff"/>
+            </svg>
+          </div>
+          <div class="meta"><div class="name">Camera Feed</div><div class="role">browser / phone capture</div></div>
         </div>
       </div>
     </div>
 
-    <div class="arrows">
-      <div class="arrow-stack">
-        <div class="arrow-line"></div>
-        <div class="arrow-down"></div>
+    <!-- ============ ARROW 1 → 2 ============ -->
+    <div class="h-arrow">
+      <div class="label">REST API</div>
+      <div class="line-wrap">
+        <div class="line"></div>
+        <div class="head"></div>
       </div>
-      <div class="arrow-label l"><b>↧</b> REST API · WebSocket</div>
-      <div class="arrow-label r">JSON Response <b>↥</b></div>
+      <div class="label">WebSocket</div>
     </div>
 
-    <!-- TIER 2 · APPLICATION -->
-    <div class="tier be">
-      <div class="tier-tag">APPLICATION TIER · BACK-END SERVER</div>
-      <div class="tier-row">
+    <!-- ============ LAYER 2: APPLICATION ============ -->
+    <div class="layer l2">
+      <div class="layer-head">
+        <div class="layer-num">02</div>
+        <div class="layer-title">
+          <h3>APPLICATION</h3>
+          <div class="sub">Back-end · NestJS API</div>
+        </div>
+      </div>
 
-        <div class="comp-card tall">
+      <div class="comp-list">
+        <div class="comp">
           <div class="logo">
             <svg viewBox="0 0 100 100">
               <path d="M52 6 C 56 8 58 11 58 14 C 58 17 56 19 53 20 C 50 21 47 21 47 24 C 47 27 50 28 54 28 C 58 28 64 27 70 28 C 78 30 84 36 86 44 C 88 53 85 62 78 67 C 72 71 64 72 56 70 C 60 73 64 78 64 84 C 64 91 58 94 52 94 C 46 94 42 91 42 85 C 42 80 45 76 49 75 C 41 76 32 73 26 67 C 18 59 17 47 22 38 C 27 30 35 26 43 26 C 41 24 40 21 41 18 C 42 13 46 9 52 6 Z" fill="#e0234e"/>
@@ -230,10 +277,20 @@
               <circle cx="60" cy="44" r="3.5" fill="#fff"/>
             </svg>
           </div>
-          <div class="meta"><div class="name">NestJS 11</div><div class="role">/api/v1 · guards</div></div>
+          <div class="meta"><div class="name">NestJS 11</div><div class="role">/api/v1 · 80+ endpoints</div></div>
         </div>
 
-        <div class="comp-card tall">
+        <div class="comp">
+          <div class="logo">
+            <svg viewBox="0 0 100 100">
+              <rect x="6" y="6" width="88" height="88" rx="6" fill="#3178c6"/>
+              <text x="50" y="68" text-anchor="middle" font-size="44" font-weight="900" fill="#fff" font-family="Arial">TS</text>
+            </svg>
+          </div>
+          <div class="meta"><div class="name">TypeScript</div><div class="role">domain layer</div></div>
+        </div>
+
+        <div class="comp">
           <div class="logo">
             <svg viewBox="0 0 100 100">
               <path d="M50 6 L 88 78 L 50 94 L 12 78 Z" fill="#fff" stroke="#0a2a52" stroke-width="3.2" stroke-linejoin="round"/>
@@ -241,20 +298,10 @@
               <text x="50" y="58" text-anchor="middle" font-size="12" font-weight="800" fill="#0a2a52" font-family="Arial">Prisma</text>
             </svg>
           </div>
-          <div class="meta"><div class="name">Prisma ORM 7</div><div class="role">8 models</div></div>
+          <div class="meta"><div class="name">Prisma ORM 7</div><div class="role">schema · 8 models</div></div>
         </div>
 
-        <div class="comp-card tall">
-          <div class="logo">
-            <svg viewBox="0 0 100 100">
-              <rect x="6" y="6" width="88" height="88" rx="6" fill="#3178c6"/>
-              <text x="50" y="68" text-anchor="middle" font-size="44" font-weight="900" fill="#fff" font-family="Arial">TS</text>
-            </svg>
-          </div>
-          <div class="meta"><div class="name">TypeScript</div><div class="role">domain</div></div>
-        </div>
-
-        <div class="comp-card tall">
+        <div class="comp">
           <div class="logo">
             <svg viewBox="0 0 100 100">
               <circle cx="50" cy="50" r="48" fill="#000"/>
@@ -269,165 +316,146 @@
               <circle cx="50" cy="50" r="10" fill="#fff"/>
             </svg>
           </div>
-          <div class="meta"><div class="name">JWT</div><div class="role">access + refresh</div></div>
+          <div class="meta"><div class="name">JWT + OAuth</div><div class="role">access + refresh</div></div>
         </div>
 
+        <div class="comp">
+          <div class="logo">
+            <svg viewBox="0 0 100 100">
+              <path d="M50 6 L 86 18 L 86 50 Q 86 78 50 94 Q 14 78 14 50 L 14 18 Z" fill="#1c7ba5" stroke="#0a2a52" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M36 50 L 46 60 L 66 38" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="meta"><div class="name">Guards</div><div class="role">Throttle · Roles · Verify</div></div>
+        </div>
+
+        <div class="comp">
+          <div class="logo">
+            <svg viewBox="0 0 100 100">
+              <rect x="12" y="22" width="32" height="32" rx="3" fill="#2bb673"/>
+              <rect x="56" y="22" width="32" height="32" rx="3" fill="#2b9cce"/>
+              <rect x="12" y="66" width="32" height="32" rx="3" fill="#e8902a"/>
+              <rect x="56" y="66" width="32" height="32" rx="3" fill="#7c5dd1"/>
+              <text x="28" y="44" text-anchor="middle" font-size="12" font-weight="800" fill="#fff" font-family="Arial">Auth</text>
+              <text x="72" y="44" text-anchor="middle" font-size="12" font-weight="800" fill="#fff" font-family="Arial">Cars</text>
+              <text x="28" y="88" text-anchor="middle" font-size="9" font-weight="800" fill="#fff" font-family="Arial">Listings</text>
+              <text x="72" y="88" text-anchor="middle" font-size="9" font-weight="800" fill="#fff" font-family="Arial">Rentals</text>
+              <text x="50" y="14" text-anchor="middle" font-size="8" font-weight="800" fill="#0a2a52" font-family="Arial">+8 MORE</text>
+            </svg>
+          </div>
+          <div class="meta"><div class="name">12 Modules</div><div class="role">Auth · Cars · Listings · Rentals · Admin · ...</div></div>
+        </div>
       </div>
     </div>
 
-    <div class="arrows" style="height:18px">
-      <div class="arrow-stack">
-        <div class="arrow-line" style="height:14px"></div>
+    <!-- ============ ARROW 2 → 3 ============ -->
+    <div class="h-arrow">
+      <div class="label">model calls</div>
+      <div class="line-wrap">
+        <div class="line"></div>
+        <div class="head"></div>
       </div>
+      <div class="label">queries</div>
     </div>
 
-    <div class="split">
-
-      <!-- TIER 3a · AI / ML -->
-      <div>
-        <div class="arrows" style="height:14px;margin-top:-14px">
-          <div class="arrow-stack">
-            <div class="arrow-line" style="height:14px"></div>
-            <div class="arrow-down"></div>
-          </div>
-        </div>
-        <div class="tier ai">
-          <div class="tier-tag">AI / ML · COMPUTER VISION</div>
-          <div class="tier-row" style="gap:8px">
-
-            <div class="comp-card tall" style="min-width:84px">
-              <div class="logo">
-                <svg viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="46" fill="#009688"/>
-                  <path d="M50 14 L 30 56 L 48 56 L 36 84 L 70 42 L 52 42 L 64 14 Z" fill="#fff"/>
-                </svg>
-              </div>
-              <div class="meta"><div class="name">FastAPI</div><div class="role">Python</div></div>
-            </div>
-
-            <div class="comp-card tall" style="min-width:84px">
-              <div class="logo">
-                <svg viewBox="0 0 100 100">
-                  <rect x="6" y="6" width="88" height="88" rx="14" fill="#111"/>
-                  <text x="50" y="44" text-anchor="middle" font-size="22" font-weight="900" fill="#facc15" font-family="Arial">YOLO</text>
-                  <text x="50" y="68" text-anchor="middle" font-size="22" font-weight="900" fill="#facc15" font-family="Arial">v8n</text>
-                  <circle cx="22" cy="78" r="4" fill="#facc15"/>
-                </svg>
-              </div>
-              <div class="meta"><div class="name">YOLOv8n</div><div class="role">CarDD · 6 cls</div></div>
-            </div>
-
-            <div class="comp-card tall" style="min-width:84px">
-              <div class="logo">
-                <svg viewBox="0 0 100 100">
-                  <circle cx="74" cy="26" r="6" fill="#ee4c2c"/>
-                  <path d="M50 12 L 80 42 Q 92 60 80 76 Q 68 92 50 92 Q 32 92 20 76 Q 8 60 20 42 L 50 12 Z M 50 28 L 32 50 Q 22 60 32 70 Q 42 80 50 80 Q 58 80 68 70 Q 78 60 68 50 L 50 28 Z" fill="#ee4c2c"/>
-                </svg>
-              </div>
-              <div class="meta"><div class="name">PyTorch</div><div class="role">training</div></div>
-            </div>
-
-            <div class="comp-card tall" style="min-width:84px">
-              <div class="logo">
-                <svg viewBox="0 0 100 100">
-                  <path d="M50 8 L 60 26 H 40 Z" fill="#ee2a35"/>
-                  <circle cx="50" cy="32" r="14" fill="none" stroke="#ee2a35" stroke-width="6"/>
-                  <path d="M22 58 L 32 76 H 12 Z" fill="#7cb342"/>
-                  <circle cx="22" cy="82" r="14" fill="none" stroke="#7cb342" stroke-width="6"/>
-                  <path d="M78 58 L 88 76 H 68 Z" fill="#1976d2"/>
-                  <circle cx="78" cy="82" r="14" fill="none" stroke="#1976d2" stroke-width="6"/>
-                </svg>
-              </div>
-              <div class="meta"><div class="name">OpenCV</div><div class="role">preproc</div></div>
-            </div>
-
-            <div class="comp-card tall" style="min-width:96px">
-              <div class="logo">
-                <svg viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="44" fill="#facc15"/>
-                  <circle cx="35" cy="44" r="5" fill="#0a2a52"/>
-                  <circle cx="65" cy="44" r="5" fill="#0a2a52"/>
-                  <path d="M30 62 Q 50 80 70 62" stroke="#0a2a52" stroke-width="4" fill="none" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="meta"><div class="name">Sentence-BERT</div><div class="role">+ FAISS</div></div>
-            </div>
-
-            <div class="comp-card tall" style="min-width:96px">
-              <div class="logo">
-                <svg viewBox="0 0 100 100">
-                  <rect x="8" y="8" width="84" height="84" rx="10" fill="#f7931e"/>
-                  <rect x="22" y="60" width="10" height="22" fill="#fff"/>
-                  <rect x="38" y="48" width="10" height="34" fill="#fff"/>
-                  <rect x="54" y="36" width="10" height="46" fill="#fff"/>
-                  <rect x="70" y="22" width="10" height="60" fill="#fff"/>
-                  <path d="M22 66 L 78 22" stroke="#fff" stroke-width="2.4" stroke-dasharray="3 2"/>
-                </svg>
-              </div>
-              <div class="meta"><div class="name">Gradient Boost</div><div class="role">cost model</div></div>
-            </div>
-          </div>
+    <!-- ============ LAYER 3: AI / DATA SERVICES ============ -->
+    <div class="layer l3">
+      <div class="layer-head">
+        <div class="layer-num">03</div>
+        <div class="layer-title">
+          <h3>AI &amp; DATA SERVICES</h3>
+          <div class="sub">Computer vision · ML · storage</div>
         </div>
       </div>
 
-      <!-- TIER 3b · DATA -->
-      <div>
-        <div class="arrows" style="height:14px;margin-top:-14px">
-          <div class="arrow-stack">
-            <div class="arrow-line" style="height:14px"></div>
-            <div class="arrow-down"></div>
+      <div class="comp-list">
+        <div class="sub-head">AI / ML Services</div>
+
+        <div class="comp">
+          <div class="logo">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="46" fill="#009688"/>
+              <path d="M50 14 L 30 56 L 48 56 L 36 84 L 70 42 L 52 42 L 64 14 Z" fill="#fff"/>
+            </svg>
           </div>
+          <div class="meta"><div class="name">FastAPI</div><div class="role">Python inference service</div></div>
         </div>
-        <div class="tier db">
-          <div class="tier-tag">DATA TIER · STORAGE</div>
-          <div class="tier-row" style="gap:12px">
 
-            <div class="comp-card tall" style="min-width:120px">
-              <div class="logo">
-                <svg viewBox="0 0 100 100">
-                  <ellipse cx="50" cy="60" rx="40" ry="32" fill="#336791"/>
-                  <ellipse cx="40" cy="48" rx="14" ry="10" fill="#fff" opacity=".25"/>
-                  <path d="M28 32 Q 36 20 50 22 Q 66 24 72 36" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
-                  <path d="M22 56 Q 28 70 40 76" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                  <circle cx="44" cy="50" r="3" fill="#fff"/>
-                </svg>
-              </div>
-              <div class="meta"><div class="name">PostgreSQL</div><div class="role">8 tables · Neon</div></div>
-            </div>
-
-            <div class="comp-card tall" style="min-width:120px">
-              <div class="logo">
-                <svg viewBox="0 0 100 100">
-                  <path d="M30 70 C 14 70 8 56 14 46 Q 18 30 36 30 Q 42 18 56 22 Q 72 24 74 40 Q 90 42 88 56 Q 86 70 70 70 Z"
-                        fill="#3448c5" stroke="#0a2a52" stroke-width="2"/>
-                  <path d="M38 50 L 50 60 L 50 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M50 60 L 62 50" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <div class="meta"><div class="name">Cloudinary</div><div class="role">image CDN</div></div>
-            </div>
-
-            <div class="comp-card tall" style="min-width:120px">
-              <div class="logo">
-                <svg viewBox="0 0 100 100">
-                  <rect x="10" y="44" width="14" height="12" fill="#0db7ed"/>
-                  <rect x="26" y="44" width="14" height="12" fill="#0db7ed"/>
-                  <rect x="42" y="44" width="14" height="12" fill="#0db7ed"/>
-                  <rect x="58" y="44" width="14" height="12" fill="#0db7ed"/>
-                  <rect x="26" y="30" width="14" height="12" fill="#0db7ed"/>
-                  <rect x="42" y="30" width="14" height="12" fill="#0db7ed"/>
-                  <rect x="42" y="16" width="14" height="12" fill="#0db7ed"/>
-                  <path d="M6 60 Q 18 78 50 78 Q 82 78 92 62 L 90 56 H 8 Z" fill="#0db7ed"/>
-                  <ellipse cx="78" cy="38" rx="8" ry="3" fill="#0db7ed"/>
-                  <line x1="72" y1="38" x2="84" y2="38" stroke="#0db7ed" stroke-width="2"/>
-                </svg>
-              </div>
-              <div class="meta"><div class="name">Docker</div><div class="role">containerised</div></div>
-            </div>
+        <div class="comp">
+          <div class="logo">
+            <svg viewBox="0 0 100 100">
+              <rect x="6" y="6" width="88" height="88" rx="14" fill="#111"/>
+              <text x="50" y="44" text-anchor="middle" font-size="22" font-weight="900" fill="#facc15" font-family="Arial">YOLO</text>
+              <text x="50" y="68" text-anchor="middle" font-size="22" font-weight="900" fill="#facc15" font-family="Arial">v8n</text>
+              <circle cx="22" cy="78" r="4" fill="#facc15"/>
+            </svg>
           </div>
+          <div class="meta"><div class="name">YOLOv8n</div><div class="role">CarDD · 6 damage classes</div></div>
+        </div>
+
+        <div class="comp">
+          <div class="logo">
+            <svg viewBox="0 0 100 100">
+              <circle cx="74" cy="26" r="6" fill="#ee4c2c"/>
+              <path d="M50 12 L 80 42 Q 92 60 80 76 Q 68 92 50 92 Q 32 92 20 76 Q 8 60 20 42 L 50 12 Z M 50 28 L 32 50 Q 22 60 32 70 Q 42 80 50 80 Q 58 80 68 70 Q 78 60 68 50 L 50 28 Z" fill="#ee4c2c"/>
+            </svg>
+          </div>
+          <div class="meta"><div class="name">PyTorch + OpenCV</div><div class="role">training · preprocessing</div></div>
+        </div>
+
+        <div class="comp">
+          <div class="logo">
+            <svg viewBox="0 0 100 100">
+              <rect x="8" y="8" width="84" height="84" rx="10" fill="#f7931e"/>
+              <rect x="22" y="60" width="10" height="22" fill="#fff"/>
+              <rect x="38" y="48" width="10" height="34" fill="#fff"/>
+              <rect x="54" y="36" width="10" height="46" fill="#fff"/>
+              <rect x="70" y="22" width="10" height="60" fill="#fff"/>
+              <path d="M22 66 L 78 22" stroke="#fff" stroke-width="2.4" stroke-dasharray="3 2"/>
+            </svg>
+          </div>
+          <div class="meta"><div class="name">Gradient Boosting</div><div class="role">repair-cost estimator</div></div>
+        </div>
+
+        <div class="comp">
+          <div class="logo">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="44" fill="#facc15"/>
+              <circle cx="35" cy="44" r="5" fill="#0a2a52"/>
+              <circle cx="65" cy="44" r="5" fill="#0a2a52"/>
+              <path d="M30 62 Q 50 80 70 62" stroke="#0a2a52" stroke-width="4" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="meta"><div class="name">Sentence-BERT + FAISS</div><div class="role">semantic part-search</div></div>
+        </div>
+
+        <div class="sub-head">Data Storage</div>
+
+        <div class="comp">
+          <div class="logo">
+            <svg viewBox="0 0 100 100">
+              <ellipse cx="50" cy="60" rx="40" ry="32" fill="#336791"/>
+              <ellipse cx="40" cy="48" rx="14" ry="10" fill="#fff" opacity=".25"/>
+              <path d="M28 32 Q 36 20 50 22 Q 66 24 72 36" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M22 56 Q 28 70 40 76" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <circle cx="44" cy="50" r="3" fill="#fff"/>
+            </svg>
+          </div>
+          <div class="meta"><div class="name">PostgreSQL · Neon</div><div class="role">8 relational tables</div></div>
+        </div>
+
+        <div class="comp">
+          <div class="logo">
+            <svg viewBox="0 0 100 100">
+              <path d="M30 70 C 14 70 8 56 14 46 Q 18 30 36 30 Q 42 18 56 22 Q 72 24 74 40 Q 90 42 88 56 Q 86 70 70 70 Z"
+                    fill="#3448c5" stroke="#0a2a52" stroke-width="2"/>
+              <path d="M38 50 L 50 60 L 50 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M50 60 L 62 50" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="meta"><div class="name">Cloudinary CDN</div><div class="role">image storage · thumbnails</div></div>
         </div>
       </div>
-
     </div>
 
   </div>

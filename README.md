@@ -30,16 +30,27 @@ All files in this folder are self-contained HTML — open in Chrome to view, the
 
 ---
 
-## Architecture Diagrams (standalone)
+## Diagrams (standalone, embeddable)
+
+### System Architecture
 
 | File | Use case |
 |---|---|
 | [SYSTEM_ARCHITECTURE.html](SYSTEM_ARCHITECTURE.html) | Light theme · 1400×1000 · with title + footer · standalone slide |
 | [SYSTEM_ARCHITECTURE_DARK.html](SYSTEM_ARCHITECTURE_DARK.html) | Dark theme · 1400×1000 · with title + footer · standalone slide |
-| [SYSTEM_ARCHITECTURE_FOR_POSTER.html](SYSTEM_ARCHITECTURE_FOR_POSTER.html) | Dark · 1200×720 · **no title/footer, ready to embed** in your FYP poster |
+| [SYSTEM_ARCHITECTURE_FOR_POSTER.html](SYSTEM_ARCHITECTURE_FOR_POSTER.html) | **Light** · 1200×720 · no title/footer, ready to embed in your FYP poster |
 | [SYSTEM_ARCHITECTURE_FOR_POSTER.png](SYSTEM_ARCHITECTURE_FOR_POSTER.png) | The above, exported at **3600 × 2160 px** (3× retina) — drop into your poster |
 
 All three diagrams contain the same components: **React + Next.js + Tailwind + ONNX-Web + React Query → NestJS + Prisma + TypeScript + JWT → splits into AI/ML (FastAPI · YOLOv8n · PyTorch · OpenCV · Sentence-BERT · Gradient Boosting) and Data (PostgreSQL · Cloudinary · Docker)**, with orange flow arrows and pill labels (REST API · WebSocket / JSON Response).
+
+### Working Pipeline
+
+| File | Use case |
+|---|---|
+| [WORKING_PIPELINE_FOR_POSTER.html](WORKING_PIPELINE_FOR_POSTER.html) | **Light** · 1400×360 · no title/footer, ready to embed in your FYP poster |
+| [WORKING_PIPELINE_FOR_POSTER.png](WORKING_PIPELINE_FOR_POSTER.png) | The above, exported at **4200 × 1080 px** (3× retina) — drop into your poster |
+
+7-step **live-detection** flow as illustrated icon chips on a light canvas: **CAMERA** (phone with LIVE + 28 FPS badges, car in viewfinder, dashed YOLO bracket) → **STREAM** (3 stacked video frames + green 28 FPS pill + motion lines) → **INFERENCE** (multi-layer neural network with red YOLOv8n label) → **DETECT** (blue car with yellow YOLO brackets, 96% confidence pill, pulsing red damage dot) → **ESTIMATE** (white receipt + cyan $ + gold coin) → **RECOMMEND** (3 gold stars + green check badge) → **REPORT** (PDF document with bar chart + red PDF stamp). Orange dashed connector line behind the icons.
 
 ---
 
