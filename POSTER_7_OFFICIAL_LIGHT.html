@@ -168,19 +168,39 @@
   .pipe-grid{
     display:grid;grid-template-columns:repeat(7,1fr);gap:6px;
     background:var(--paper);border:1px solid var(--line);
-    border-radius:10px;padding:14px;margin-top:10px;
+    border-radius:10px;padding:20px 14px 14px;margin-top:10px;
     box-shadow:0 2px 6px rgba(28,88,150,.05);
+    position:relative;
   }
-  .pstep{text-align:center;font-size:10.5px;line-height:1.35;color:var(--ink-2);position:relative}
+  /* dashed connector line behind icons */
+  .pipe-grid::before{
+    content:'';position:absolute;left:65px;right:65px;top:58px;
+    height:2px;background-image:linear-gradient(90deg,var(--cyan-2) 50%,transparent 0);
+    background-size:8px 2px;opacity:.45;z-index:0;
+  }
+  .pstep{text-align:center;font-size:10.5px;line-height:1.35;color:var(--ink-2);position:relative;z-index:1}
   .pstep .ci{
-    width:48px;height:48px;border-radius:50%;
-    background:linear-gradient(180deg,var(--cyan-2),var(--pill-2));
-    color:#fff;font-weight:800;font-size:18px;
-    margin:0 auto 6px;display:flex;align-items:center;justify-content:center;
-    box-shadow:0 4px 10px rgba(28,123,165,.30),inset 0 -3px 0 rgba(0,0,0,.18);
-    border:2px solid #fff;
+    width:74px;height:74px;
+    margin:0 auto 10px;
+    position:relative;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(160deg,#ffffff 0%,#eef4fb 100%);
+    border:1.5px solid var(--cyan-2);
+    border-radius:20px;
+    box-shadow:0 8px 16px rgba(28,123,165,.16),0 2px 4px rgba(0,0,0,.04);
   }
-  .pstep b{color:var(--ink);display:block;font-size:11px;margin-bottom:2px;letter-spacing:.4px}
+  .pstep .ci svg.ic{
+    width:54px;height:54px;display:block;
+  }
+  .pstep .num{
+    position:absolute;top:-6px;right:-6px;z-index:3;
+    width:22px;height:22px;border-radius:50%;
+    background:linear-gradient(180deg,#0a2a52,#1c5896);
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:800;border:2px solid #fff;
+    box-shadow:0 2px 6px rgba(0,0,0,.2);
+  }
+  .pstep b{color:var(--ink);display:block;font-size:11px;margin-bottom:2px;letter-spacing:.4px;margin-top:2px}
 
   /* ===== METRICS ===== */
   .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
@@ -464,13 +484,198 @@
     <!-- Working Pipeline -->
     <div style="margin-top:12px"><div class="pill-h">WORKING PIPELINE</div></div>
     <div class="pipe-grid">
-      <div class="pstep"><div class="ci">1</div><b>UPLOAD</b>1–10 car images via web / camera</div>
-      <div class="pstep"><div class="ci">2</div><b>STORE</b>Cloudinary CDN with thumbnails</div>
-      <div class="pstep"><div class="ci">3</div><b>DETECT</b>YOLOv8n returns 6-class boxes + scores</div>
-      <div class="pstep"><div class="ci">4</div><b>SEVERITY</b>Per-part severity tagged</div>
-      <div class="pstep"><div class="ci">5</div><b>ESTIMATE</b>Gradient Boosting predicts repair cost</div>
-      <div class="pstep"><div class="ci">6</div><b>RECOMMEND</b>Sentence-BERT ranks parts</div>
-      <div class="pstep"><div class="ci">7</div><b>REPORT</b>Annotated PDF + dashboard</div>
+
+      <!-- 1 · CAMERA: phone with live viewfinder + car -->
+      <div class="pstep">
+        <div class="ci">
+          <span class="num">1</span>
+          <svg class="ic" viewBox="0 0 48 48">
+            <!-- phone body -->
+            <rect x="13" y="3" width="22" height="42" rx="3.5" fill="#0a2a52"/>
+            <!-- screen -->
+            <rect x="15" y="8" width="18" height="32" fill="#1c5896"/>
+            <!-- LIVE badge -->
+            <rect x="16.5" y="10" width="9" height="3.6" rx="1.6" fill="#dc4040"/>
+            <circle cx="18.4" cy="11.8" r=".7" fill="#fff"/>
+            <text x="22" y="12.7" text-anchor="middle" font-size="2.5" font-weight="800" fill="#fff" font-family="Arial">LIVE</text>
+            <!-- FPS -->
+            <rect x="26.5" y="10" width="5.5" height="3.6" rx="1.6" fill="#000" opacity=".55"/>
+            <text x="29.2" y="12.7" text-anchor="middle" font-size="2.5" font-weight="700" fill="#fff" font-family="Arial">28</text>
+            <!-- car silhouette in viewfinder -->
+            <path d="M16.5 27 L 18.5 23 L 29.5 23 L 31.5 27 L 31.5 31 L 16.5 31 Z" fill="#82e1ff"/>
+            <circle cx="20" cy="31" r="1.4" fill="#0a2a52"/>
+            <circle cx="28" cy="31" r="1.4" fill="#0a2a52"/>
+            <!-- yellow detection bracket on car -->
+            <rect x="17" y="22" width="14" height="9" fill="none" stroke="#facc15" stroke-width="1.1" stroke-dasharray="1.5 1"/>
+            <!-- speaker slot -->
+            <rect x="22" y="5.4" width="4" height=".7" rx=".3" fill="#1c5896"/>
+            <!-- capture button -->
+            <circle cx="24" cy="42.5" r="1.6" fill="#fff"/>
+            <circle cx="24" cy="42.5" r=".9" fill="#dc4040"/>
+          </svg>
+        </div>
+        <b>CAMERA</b>Open browser/phone camera at vehicle
+      </div>
+
+      <!-- 2 · STREAM: stacked video frames + FPS -->
+      <div class="pstep">
+        <div class="ci">
+          <span class="num">2</span>
+          <svg class="ic" viewBox="0 0 48 48">
+            <!-- 3 stacked frames -->
+            <rect x="5"  y="13" width="22" height="14" rx="1.5" fill="#cfe7f5" stroke="#0a2a52" stroke-width="1.2"/>
+            <rect x="10" y="17" width="22" height="14" rx="1.5" fill="#82e1ff" stroke="#0a2a52" stroke-width="1.2"/>
+            <rect x="15" y="21" width="22" height="14" rx="1.5" fill="#1c7ba5" stroke="#0a2a52" stroke-width="1.2"/>
+            <!-- play triangle on top frame -->
+            <path d="M22 25 L 22 31 L 30 28 Z" fill="#fff"/>
+            <!-- FPS pill -->
+            <rect x="32" y="4" width="14" height="6.5" rx="3.2" fill="#2bb673" stroke="#0a2a52" stroke-width="1"/>
+            <text x="39" y="9" text-anchor="middle" font-size="3.7" font-weight="800" fill="#fff" font-family="Arial">28 FPS</text>
+            <!-- speed lines -->
+            <line x1="38" y1="38" x2="46" y2="38" stroke="#1c5896" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="40" y1="42" x2="46" y2="42" stroke="#1c5896" stroke-width="1.5" stroke-linecap="round" opacity=".55"/>
+            <line x1="36" y1="46" x2="46" y2="46" stroke="#1c5896" stroke-width="1.4" stroke-linecap="round" opacity=".3"/>
+          </svg>
+        </div>
+        <b>STREAM</b>Real-time frames at 28+ FPS
+      </div>
+
+      <!-- 3 · YOLOv8n: neural network nodes + label -->
+      <div class="pstep">
+        <div class="ci">
+          <span class="num">3</span>
+          <svg class="ic" viewBox="0 0 48 48">
+            <!-- connections (drawn first, behind nodes) -->
+            <g stroke="#bcd4ec" stroke-width=".8">
+              <line x1="9" y1="12" x2="20" y2="9"/><line x1="9" y1="12" x2="20" y2="19"/><line x1="9" y1="12" x2="20" y2="29"/>
+              <line x1="9" y1="22" x2="20" y2="9"/><line x1="9" y1="22" x2="20" y2="19"/><line x1="9" y1="22" x2="20" y2="29"/>
+              <line x1="9" y1="32" x2="20" y2="9"/><line x1="9" y1="32" x2="20" y2="19"/><line x1="9" y1="32" x2="20" y2="29"/>
+              <line x1="20" y1="9"  x2="32" y2="13"/><line x1="20" y1="9"  x2="32" y2="23"/><line x1="20" y1="9"  x2="32" y2="33"/>
+              <line x1="20" y1="19" x2="32" y2="13"/><line x1="20" y1="19" x2="32" y2="23"/><line x1="20" y1="19" x2="32" y2="33"/>
+              <line x1="20" y1="29" x2="32" y2="13"/><line x1="20" y1="29" x2="32" y2="23"/><line x1="20" y1="29" x2="32" y2="33"/>
+            </g>
+            <g stroke="#facc15" stroke-width="1.1">
+              <line x1="32" y1="13" x2="42" y2="18"/><line x1="32" y1="23" x2="42" y2="18"/>
+              <line x1="32" y1="23" x2="42" y2="28"/><line x1="32" y1="33" x2="42" y2="28"/>
+            </g>
+            <!-- input layer -->
+            <circle cx="9"  cy="12" r="2.6" fill="#82e1ff" stroke="#0a2a52" stroke-width="1"/>
+            <circle cx="9"  cy="22" r="2.6" fill="#82e1ff" stroke="#0a2a52" stroke-width="1"/>
+            <circle cx="9"  cy="32" r="2.6" fill="#82e1ff" stroke="#0a2a52" stroke-width="1"/>
+            <!-- hidden 1 -->
+            <circle cx="20" cy="9"  r="2.6" fill="#1c7ba5" stroke="#0a2a52" stroke-width="1"/>
+            <circle cx="20" cy="19" r="2.6" fill="#1c7ba5" stroke="#0a2a52" stroke-width="1"/>
+            <circle cx="20" cy="29" r="2.6" fill="#1c7ba5" stroke="#0a2a52" stroke-width="1"/>
+            <!-- hidden 2 -->
+            <circle cx="32" cy="13" r="2.6" fill="#1c5896" stroke="#0a2a52" stroke-width="1"/>
+            <circle cx="32" cy="23" r="2.6" fill="#1c5896" stroke="#0a2a52" stroke-width="1"/>
+            <circle cx="32" cy="33" r="2.6" fill="#1c5896" stroke="#0a2a52" stroke-width="1"/>
+            <!-- output -->
+            <circle cx="42" cy="18" r="2.6" fill="#facc15" stroke="#0a2a52" stroke-width="1"/>
+            <circle cx="42" cy="28" r="2.6" fill="#facc15" stroke="#0a2a52" stroke-width="1"/>
+            <!-- label -->
+            <rect x="9" y="40" width="30" height="6.4" rx="1.4" fill="#dc4040"/>
+            <text x="24" y="44.8" text-anchor="middle" font-size="4.2" font-weight="800" fill="#fff" font-family="Arial">YOLOv8n</text>
+          </svg>
+        </div>
+        <b>INFERENCE</b>YOLOv8n via ONNX-Web (in-browser)
+      </div>
+
+      <!-- 4 · DETECT: car with YOLO brackets + 96% pill (kept) -->
+      <div class="pstep">
+        <div class="ci">
+          <span class="num">4</span>
+          <svg class="ic" viewBox="0 0 48 48">
+            <path d="M4 12 L4 7 L9 7"   stroke="#facc15" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <path d="M44 12 L44 7 L39 7" stroke="#facc15" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <path d="M4 36 L4 41 L9 41"  stroke="#facc15" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <path d="M44 36 L44 41 L39 41" stroke="#facc15" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <rect x="32" y="2" width="14" height="6" rx="3" fill="#dc4040"/>
+            <text x="39" y="6.5" text-anchor="middle" font-size="4.4" font-weight="800" fill="#fff" font-family="Arial">96%</text>
+            <path d="M8 30 L11 22 C 12 20 13 19 15 19 L 33 19 C 35 19 36 20 37 22 L 40 30 L 40 34 L 8 34 Z"
+                  fill="#1c5896" stroke="#0a2a52" stroke-width="1.3" stroke-linejoin="round"/>
+            <path d="M15 28 L 17 21 L 31 21 L 33 28 Z" fill="#cfe7f5" stroke="#0a2a52" stroke-width="1"/>
+            <line x1="24" y1="21" x2="24" y2="28" stroke="#0a2a52" stroke-width=".8"/>
+            <circle cx="14" cy="34" r="3" fill="#0a2a52"/>
+            <circle cx="14" cy="34" r="1.2" fill="#82e1ff"/>
+            <circle cx="34" cy="34" r="3" fill="#0a2a52"/>
+            <circle cx="34" cy="34" r="1.2" fill="#82e1ff"/>
+            <!-- pulsing damage dot -->
+            <circle cx="20" cy="25" r="2.2" fill="#dc4040">
+              <animate attributeName="opacity" values="1;0.4;1" dur="1.4s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+        </div>
+        <b>DETECT</b>Bounding boxes + class + score on live feed
+      </div>
+
+      <!-- 5 · ESTIMATE: receipt with $ + coins -->
+      <div class="pstep">
+        <div class="ci">
+          <span class="num">5</span>
+          <svg class="ic" viewBox="0 0 48 48">
+            <!-- coin behind -->
+            <circle cx="36" cy="36" r="7" fill="#facc15" stroke="#0a2a52" stroke-width="1.3"/>
+            <text x="36" y="39.5" text-anchor="middle" font-size="9" font-weight="900" fill="#0a2a52" font-family="Georgia">$</text>
+            <!-- receipt body -->
+            <path d="M9 5 L33 5 L33 36 L30 39.5 L27 36 L24 39.5 L21 36 L18 39.5 L15 36 L12 39.5 L9 36 Z"
+                  fill="#fff" stroke="#0a2a52" stroke-width="1.4" stroke-linejoin="round"/>
+            <!-- header bar -->
+            <rect x="11" y="8" width="20" height="3.5" rx="1" fill="#1c5896"/>
+            <!-- amount lines -->
+            <line x1="13" y1="16" x2="29" y2="16" stroke="#bcd4ec" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="13" y1="20" x2="25" y2="20" stroke="#bcd4ec" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- big $ amount -->
+            <text x="21" y="32" text-anchor="middle" font-size="11" font-weight="900" fill="#1c7ba5" font-family="Georgia">$</text>
+            <line x1="13" y1="26" x2="29" y2="26" stroke="#0a2a52" stroke-width="1"/>
+          </svg>
+        </div>
+        <b>ESTIMATE</b>Gradient Boosting predicts repair cost
+      </div>
+
+      <!-- 6 · RECOMMEND: 3 stars + green check badge -->
+      <div class="pstep">
+        <div class="ci">
+          <span class="num">6</span>
+          <svg class="ic" viewBox="0 0 48 48">
+            <!-- 3 stars -->
+            <path d="M9.5 9 L11 12.5 L14.7 13 L12 15.5 L12.7 19 L9.5 17.2 L6.3 19 L7 15.5 L4.3 13 L8 12.5 Z" fill="#facc15" stroke="#b48314" stroke-width=".7"/>
+            <path d="M24 5 L26 9.5 L31 10.2 L27.4 13.6 L28.4 18.5 L24 16 L19.6 18.5 L20.6 13.6 L17 10.2 L22 9.5 Z" fill="#facc15" stroke="#b48314" stroke-width=".8"/>
+            <path d="M38.5 9 L40 12.5 L43.7 13 L41 15.5 L41.7 19 L38.5 17.2 L35.3 19 L36 15.5 L33.3 13 L37 12.5 Z" fill="#facc15" stroke="#b48314" stroke-width=".7"/>
+            <!-- check badge -->
+            <circle cx="24" cy="33" r="10" fill="#2bb673" stroke="#0a2a52" stroke-width="1.3"/>
+            <path d="M19 33 L23 37 L30 28" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <b>RECOMMEND</b>Sentence-BERT ranks parts
+      </div>
+
+      <!-- 7 · REPORT: PDF document with bar chart inside -->
+      <div class="pstep">
+        <div class="ci">
+          <span class="num">7</span>
+          <svg class="ic" viewBox="0 0 48 48">
+            <!-- page -->
+            <path d="M9 5 L 30 5 L 39 14 L 39 43 L 9 43 Z" fill="#fff" stroke="#0a2a52" stroke-width="1.4" stroke-linejoin="round"/>
+            <!-- corner fold -->
+            <path d="M30 5 L 30 14 L 39 14 Z" fill="#dbe9f7" stroke="#0a2a52" stroke-width="1.4" stroke-linejoin="round"/>
+            <!-- title bar -->
+            <rect x="13" y="18" width="14" height="2.4" rx="1" fill="#1c5896"/>
+            <line x1="13" y1="23" x2="22" y2="23" stroke="#bcd4ec" stroke-width="1.4" stroke-linecap="round"/>
+            <!-- bar chart -->
+            <rect x="13" y="35" width="4" height="4"  fill="#2bb673"/>
+            <rect x="19" y="32" width="4" height="7"  fill="#2b9cce"/>
+            <rect x="25" y="28" width="4" height="11" fill="#1c5896"/>
+            <rect x="31" y="30" width="4" height="9"  fill="#1c7ba5"/>
+            <line x1="11" y1="40" x2="37" y2="40" stroke="#0a2a52" stroke-width="1"/>
+            <!-- PDF stamp -->
+            <rect x="29" y="34" width="9" height="5" rx="1" fill="#dc4040" transform="rotate(-12,33.5,36.5)"/>
+            <text x="33.5" y="38" text-anchor="middle" font-size="3.4" font-weight="800" fill="#fff" font-family="Arial" transform="rotate(-12,33.5,36.5)">PDF</text>
+          </svg>
+        </div>
+        <b>REPORT</b>Annotated PDF + dashboard
+      </div>
+
     </div>
 
     <!-- Results + Tech -->
