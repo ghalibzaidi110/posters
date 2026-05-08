@@ -31,13 +31,13 @@
   html,body{background:#222;font-family:'Segoe UI',Helvetica,Arial,sans-serif;color:var(--ink)}
 
   .canvas{
-    width:1600px;height:780px;margin:30px auto;
+    width:1600px;height:640px;margin:30px auto;
     background:
       radial-gradient(ellipse at 50% 0%,rgba(28,123,165,.06) 0%,transparent 50%),
       var(--bg);
     box-shadow:0 0 40px rgba(0,0,0,.5);
     overflow:hidden;position:relative;
-    padding:36px 36px 32px;
+    padding:24px 28px 22px;
   }
   .canvas::before{
     content:'';position:absolute;inset:0;
@@ -58,7 +58,7 @@
     background:var(--paper);
     border:1.5px solid var(--line);
     border-radius:18px;
-    padding:24px 22px 22px;
+    padding:18px 18px 16px;
     box-shadow:0 6px 20px rgba(28,88,150,.08);
     display:flex;flex-direction:column;
     position:relative;
@@ -69,50 +69,53 @@
 
   /* HEADER inside each layer */
   .layer-head{
-    display:flex;align-items:center;gap:14px;
-    padding-bottom:14px;margin-bottom:16px;
+    display:flex;align-items:center;gap:12px;
+    padding-bottom:10px;margin-bottom:10px;
     border-bottom:2px dashed var(--line);
   }
   .layer-num{
-    flex:0 0 46px;width:46px;height:46px;border-radius:14px;
+    flex:0 0 40px;width:40px;height:40px;border-radius:12px;
     display:flex;align-items:center;justify-content:center;
-    color:#fff;font-weight:900;font-size:18px;letter-spacing:.5px;
+    color:#fff;font-weight:900;font-size:16px;letter-spacing:.5px;
     box-shadow:0 4px 10px rgba(0,0,0,.18);
   }
   .l1 .layer-num{background:linear-gradient(180deg,#f4b35a,var(--accent-1))}
   .l2 .layer-num{background:linear-gradient(180deg,var(--cyan-2),var(--accent-2))}
   .l3 .layer-num{background:linear-gradient(180deg,#a48ce0,var(--accent-3))}
   .layer-title h3{
-    color:var(--ink);font-size:18px;font-weight:800;letter-spacing:.5px;line-height:1.1;
+    color:var(--ink);font-size:16px;font-weight:800;letter-spacing:.5px;line-height:1.1;
   }
-  .layer-title .sub{color:var(--muted);font-size:11.5px;font-style:italic;letter-spacing:.3px;margin-top:2px}
+  .layer-title .sub{color:var(--muted);font-size:11px;font-style:italic;letter-spacing:.3px;margin-top:1px}
 
-  /* component list */
-  .comp-list{display:flex;flex-direction:column;gap:9px;flex:1}
+  /* component list — spreads to fill column evenly */
+  .comp-list{
+    display:flex;flex-direction:column;flex:1;
+    justify-content:space-between;gap:6px;
+  }
 
   .comp{
     background:#fff;
     border:1.5px solid var(--line);
     border-radius:10px;
-    padding:9px 12px;
-    display:flex;align-items:center;gap:11px;
+    padding:7px 11px;
+    display:flex;align-items:center;gap:10px;
     box-shadow:0 2px 6px rgba(28,88,150,.05);
-    transition:transform .15s;
   }
   .l1 .comp{border-left:3px solid var(--accent-1)}
   .l2 .comp{border-left:3px solid var(--accent-2)}
   .l3 .comp{border-left:3px solid var(--accent-3)}
 
-  .comp .logo{flex:0 0 32px;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
-  .comp .logo svg{width:32px;height:32px}
-  .comp .meta{display:flex;flex-direction:column;line-height:1.22;flex:1;min-width:0}
-  .comp .name{color:var(--ink);font-weight:800;font-size:12.5px;letter-spacing:.2px}
-  .comp .role{color:var(--muted);font-size:10.5px}
+  .comp .logo{flex:0 0 30px;width:30px;height:30px;display:flex;align-items:center;justify-content:center}
+  .comp .logo svg{width:30px;height:30px}
+  .comp .meta{display:flex;flex-direction:column;line-height:1.2;flex:1;min-width:0}
+  .comp .name{color:var(--ink);font-weight:800;font-size:12px;letter-spacing:.2px}
+  .comp .role{color:var(--muted);font-size:10px}
 
   /* sub-section header inside layer 3 */
   .sub-head{
-    color:var(--accent-3);font-size:11px;font-weight:800;letter-spacing:1.4px;
-    margin:6px 0 4px;text-transform:uppercase;
+    color:var(--accent-3);font-size:10.5px;font-weight:800;letter-spacing:1.4px;
+    margin:2px 0 2px;text-transform:uppercase;
+    text-align:center;
   }
   .sub-head:first-child{margin-top:0}
 
